@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Ritma Table Canlı Yapım Aşaması</title>
+	<!-- ================== GOOGLE FONTS ==================-->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet">
+	<!-- ======================= GLOBAL VENDOR STYLES ========================-->
+	<link rel="stylesheet" href="../assets/css/vendor/bootstrap.css">
+	<link rel="stylesheet" href="../assets/vendor/metismenu/dist/metisMenu.css">
+	<link rel="stylesheet" href="../assets/vendor/switchery-npm/index.css">
+	<link rel="stylesheet" href="../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+	<!-- ======================= LINE AWESOME ICONS ===========================-->
+	<link rel="stylesheet" href="../assets/css/icons/line-awesome.min.css">
+	<!-- ======================= DRIP ICONS ===================================-->
+	<link rel="stylesheet" href="../assets/css/icons/dripicons.min.css">
+	<!-- ======================= MATERIAL DESIGN ICONIC FONTS =================-->
+	<link rel="stylesheet" href="../assets/css/icons/material-design-iconic-font.min.css">
+	<!-- ======================= PAGE LEVEL VENDOR STYLES ============================-->
+	<!-- ======================= PAGE LEVEL VENDOR STYLES ========================-->
+	<link rel="stylesheet" href="../assets/vendor/select2/select2.min.css">
+	<link rel="stylesheet" href="../assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.css">
+	<!-- ======================= GLOBAL COMMON STYLES ============================-->
+	<link rel="stylesheet" href="../assets/css/common/main.bundle.css">
+	<!-- ======================= LAYOUT TYPE ===========================-->
+	<link rel="stylesheet" href="../assets/css/layouts/vertical/core/main.css">
+	<!-- ======================= MENU TYPE ===========================================-->
+	<link rel="stylesheet" href="../assets/css/layouts/vertical/menu-type/default.css">
+	<!-- ======================= THEME COLOR STYLES ===========================-->
+	<link rel="stylesheet" href="../assets/css/layouts/vertical/themes/theme-a.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/rowreorder/1.2.4/css/rowReorder.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+
+	<!-- update the version number as needed -->
+	<script defer src="/__/firebase/5.8.3/firebase-app.js"></script>
+	<!-- include only the Firebase features as you need -->
+	<script defer src="/__/firebase/5.8.3/firebase-auth.js"></script>
+	<script defer src="/__/firebase/5.8.3/firebase-database.js"></script>
+	<script defer src="/__/firebase/5.8.3/firebase-messaging.js"></script>
+	<script defer src="/__/firebase/5.8.3/firebase-storage.js"></script>
+	<!-- initialize the SDK after all desired features are loaded -->
+	<script defer src="/__/firebase/init.js"></script>
+	<style type="text/css">
+		hr.style-eight {
+			overflow: visible;
+			/* For IE */
+			padding: 0;
+			border: none;
+			border-top: medium double #333;
+			color: #333;
+			text-align: center;
+		}
+
+		hr.style-eight:after {
+			content: "Grup Satırı";
+			display: inline-block;
+			position: relative;
+			top: -0.7em;
+			font-size: 1.5em;
+			padding: 0 0.25em;
+			background: white;
+		}
+
+		.btn-exp {
+			padding-left: 7px;
+			padding-right: 8px;
+			padding-bottom: 0px;
+			padding-top: 0px;
+			height: 21px;
+		}
+
+		.table input {
+			font-size: 0.7rem !important;
+		}
+
+		#example tbody tr .la-times {
+			display: none;
+			margin-top: 3px;
+		}
+
+		#example tbody tr:hover .la-times {
+			display: inline-block;
+		}
+
+		.tooltip {
+			position: absolute !important;
+			pointer-events: none !important;
+		}
+
+		.popover {
+			pointer-events: none;
+		}
+
+		table.dataTable.table-sm>thead>tr>th {
+			padding-right: 5px;
+		}
+
+		table thead {
+			line-height: 3;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- CONTENT WRAPPER -->
+	<div id="app">
+
+		<!-- MENU SIDEBAR WRAPPER -->
+		<section class="page-content container-fluid">
+			<div class="modal fade " id="modal-yorum" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel9"><i class="la la-plus"></i> Yeni Yorum</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true" class="zmdi zmdi-close"></span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-6 p-r-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">İsim Soyisim</span>
+										</div>
+										<input type="text" class="form-control" aria-label="Default"
+											aria-describedby="inputGroup-sizing-default" id="cName">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text">E-Mail</span>
+										</div>
+										<input type="text" class="form-control" aria-label="Default"
+											aria-describedby="inputGroup-sizing-default" id="cMail">
+									</div>
+								</div>
+							</div>
+
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Yorum</span>
+								</div>
+								<textarea class="form-control" aria-label="With textarea" id="cc"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary btn-outline" data-dismiss="modal">İptal</button>
+							<button type="button" class="btn btn-primary" id="saveComment">Yorum Ekle</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="p-t-0 p-l-0 p-r-0">
+				<button class="btn btn-info  save" style="display: none">Kaydet</button>
+				<button class="btn btn-secondary" id="new-column">Yeni Satır Ekle</button>
+				<button class="btn btn-secondary" id="new-group">Grup Satırı Ekle</button>
+
+				<div class="col-md-4 pull-right p-r-0">
+					<div class="input-group mb-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text"><i class="la la-search"></i></div>
+						</div>
+						<input type="text" class="form-control" id="rtmsearch" placeholder="Ara..">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+
+
+							<table id="example" class="table table-sm" style="width:100%">
+								<thead>
+									<tr>
+										<th>seq</th>
+										<th width="10px" style="width: 10px "><i class="la la-arrows-v"></i></th>
+										<th width="100px">Ürün&nbsp;Kodu</th>
+										<th>Ürün&nbsp;&&nbsp;Hizmet</th>
+										<th width="20px" style="width: 20px"> </th>
+										<th width="100px">B.Fiyat</th>
+										<th width="100px">KDV</th>
+										<th>ab</th>
+										<th style="width: 30px">Miktar</th>
+										<th width="100px">Satır&nbsp;Toplam</th>
+
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+							<table class="table table-sm pull-right" style="width: 300px">
+								<tr>
+									<td>Toplam</td>
+									<td class="tt text-right"></td>
+								</tr>
+								<tr>
+									<td>İndirim</td>
+									<td class="text-right">400.00 <i class="la la-try"></i></td>
+								</tr>
+								<tr>
+									<td>Genel Toplam</td>
+									<td class="text-right gt">3,205.00 <i class="la la-try"></i></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-12">
+					<div class="card">
+						<h5 class="card-header"><button class="btn btn-info" data-toggle="modal" data-target="#modal-yorum"><i
+									class="la la-plus text-white"></i> Yeni Yorum</button>
+							<small class="text-info pull-right p-t-10">Yorumlar Gerçek Zamanlı
+								Kaydedilmektedir..</small> </h5>
+						<div class="card-body">
+							<div class="timeline timeline-border yorumlar">
+
+								<div class="alert alert-warning yorum-alert">Yorumlar henüz
+									Yüklenmedi</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</div>
+	<!-- END CONTENT WRAPPER -->
+	<!-- ================== GLOBAL VENDOR SCRIPTS ==================-->
+	<script src="../assets/vendor/modernizr/modernizr.custom.js"></script>
+	<script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/vendor/js-storage/js.storage.js"></script>
+	<script src="../assets/vendor/js-cookie/src/js.cookie.js"></script>
+	<script src="../assets/vendor/pace/pace.js"></script>
+	<script src="../assets/vendor/metismenu/dist/metisMenu.js"></script>
+	<script src="../assets/vendor/switchery-npm/index.js"></script>
+	<script src="../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+	<!-- ================== PAGE LEVEL VENDOR SCRIPTS ==================-->
+	<script src="../assets/vendor/datatables.net/js/jquery.dataTables.js"></script>
+	<script src="../assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+	<!-- ================== PAGE LEVL VENDOR SCRIPTS ==================-->
+	<script src="../assets/vendor/select2/select2.min.js"></script>
+	<!-- ================== GLOBAL APP SCRIPTS ==================-->
+	<script src="../assets/js/global/app.js"></script>
+	<!-- ================== PAGE LEVEL APP SCRIPTS ==================-->
+	<script src="../assets/js/components/select2-init.js"></script>
+</body>
+<script src="../assets/js/components/datatables-init.js"></script>
+
+<!--eğer Firebase Hosting Üzerinden Kullanılmıyacak ise aşağıdaki satır yorumdan çıkarılmalıdır.-->
+<!--<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>-->
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		if (!Notification) {
+			alert('Desktop notifications not available in your browser. Try Chromium.');
+			return;
+		}
+
+		if (Notification.permission !== "granted")
+			Notification.requestPermission();
+	});
+
+	function notifyMe(message) {
+		// Let's check if the browser supports notifications
+		if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		}
+
+		// Let's check if the user is okay to get some notification
+		else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+			var notification = new Notification('Ritma Table', {
+				icon: 'https://i.hizliresim.com/bVEVyb.png',
+				body: message,
+			});
+		}
+
+		// Otherwise, we need to ask the user for permission
+		// Note, Chrome does not implement the permission static property
+		// So we have to check for NOT 'denied' instead of 'default'
+		else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+
+				// Whatever the user answers, we make sure we store the information
+				if (!('permission' in Notification)) {
+					Notification.permission = permission;
+				}
+
+				// If the user is okay, let's create a notification
+				if (permission === "granted") {
+
+					var notification = new Notification('Ritma Table', {
+						icon: 'https://i.hizliresim.com/bVEVyb.png',
+
+						body: message,
+					});
+				}
+			});
+		}
+
+		// At last, if the user already denied any notification, and you 
+		// want to be respectful there is no need to bother him any more.
+	}
+</script>
+<script type="text/javascript" src="js/ritmatable.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var table = $("#example").RitmaTable({
+			"scrollX": true, "scrollY": "500px", "rowReorder": true, "search": "#rtmsearch", "addColumn": "#new-column"
+		});
+
+		$("#saveComment").click(function () {
+			var d = new Date();
+
+			var month = d.getMonth() + 1;
+			var day = d.getDate();
+			var time = d.getHours() + ":" + d.getMinutes();
+			var output = d.getFullYear() + '/' +
+				(('' + month).length < 2 ? '0' : '') + month + '/' +
+				(('' + day).length < 2 ? '0' : '') + day;
+
+			firebase.database().ref('yorum').push([$("#cc").val(), $("#cName").val(), $("#cMail").val(), output, time]);
+		});
+		if ($(".yorumlar").text() == null) {
+			$(".yorum-alert").show();
+		}
+		firebase.database().ref('yorum').on('value', snap => {
+			$(".yorumlar").html(" ");
+			for (var index in snap.val()) {
+				console.log(snap.val()[index]);
+				$(".yorumlar").prepend('<div class="timeline-list  timeline-border timeline-info">' +
+					'<div class="timeline-info">' +
+					'<div class="media"><img class="align-self-center mr-3 w-40 rounded-circle"' +
+					'	src="https://i.hizliresim.com/pbP9kq.png" alt=" ">' +
+					'<div class="media-body">' +
+					'<div class="row">' +
+					'	<div class="col-md-4 col-lg-4 col-xl-3" style="border-right: 1px solid #ccc">' +
+					'<p class="mb-0"><strong class="">' + snap.val()[index][1] + '</strong></p><span><a ' +
+					'href="javascript:void(0)">' + snap.val()[index][2] + '</a></span>' +
+					'</div>' +
+					'<div class="col-md-8 col-lg-8 col-xl-9" style="display: flex;align-items: left; flex-direction: column;"><h5>' + snap.val()[index][0] + '</h5><small class="text-muted">' + snap.val()[index][3] + ' <i class="la la-clock-o"></i> ' + snap.val()[index][4] + '</small>	</div>' +
+					'</div>' +
+					'</div>' +
+					'</div>' +
+					'</div>' +
+					'	</div>');
+
+			}
+			$(".yorum-alert").hide();
+
+
+		});
+	
+		$("#new-group").click(function () {
+			var data = table
+				.rows()
+				.data();
+
+
+
+			var newRow = "<tr> <td>" + data.length + "</td> <td><i class='la la-arrows-v '></i><i class='la la-times '></i></td> <td colspan='8'><hr class='style-eight'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td></tr>";
+
+			table.row.add($(newRow)).draw();
+
+
+			//firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
+			$(".save").show();
+		})
+		function updateTable(id){
+		var cel=table.cell(id, 0).data(id).draw();
+			console.log(cel)
+		}
+		$(".save").click(function () {
+			
+			table.cells().every(function (rowIndex, colmnIndex) {
+				var node = $(this.node());
+				if (node.find(".changed").length > 0) {
+
+					table.cell(rowIndex, colmnIndex).data(node.find(".changed").text()).draw();
+				}
+			});
+			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+				var data = this.data();
+		
+					updateTable(rowIdx)
+		
+				// ... do something with data(), or this.node(), etc
+			});
+			
+	
+			var tableData = table.rows().data();
+			var serverdata = [];
+			console.log(table.data());
+			//firebase.database().ref("body").set()
+			//notifyMe("Ritma Table Verileri Başarı İle Kaydedildi..");
+			for (var i = 0; i <= tableData.length - 1; i++) {
+				serverdata.push(tableData[i]);
+			}
+			console.log(serverdata)
+			firebase.database().ref("body").set(serverdata)
+			notifyMe("Ritma Table Verileri Başarı İle Kaydedildi..");
+			$(".save").hide();
+		});
+		firebase.database().ref('body').on('value', snap => {
+			;
+			table
+				.clear()
+				.draw();
+			console.log(snap.val());
+
+			for (var index in snap.val()) {
+				table.row.add([
+					snap.val()[index][0],
+					snap.val()[index][1],
+					snap.val()[index][2],
+					snap.val()[index][3],
+					snap.val()[index][4],
+					parseFloat(snap.val()[index][5], 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString(),
+					snap.val()[index][6],
+					snap.val()[index][7],
+					snap.val()[index][8],
+					parseFloat(snap.val()[index][9], 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString(),
+				]).draw();
+
+			}
+
+
+
+
+			$('.tooltip').stop().fadeOut(200);
+
+		});
+		var s = "";
+		$('#example').on('focus', '.change', function () {
+			s = $(this).val();
+		});
+		$('#example').on('click', '.save', function () {
+
+		});
+
+		$(document).on('click', function (e) {
+			if ($('.btn-exp').length > 1)
+				$('.btn-exp').popover('hide');
+			$(e.target).popover('toggle');
+
+		});
+		$('#example').on('focusout', '.change', function () {
+			if (s == $(this).val()) {
+				var cell = $(this).parent();
+				table.cell(cell).data($(this).val()).draw();
+			} else {
+				var cell = $(this).parent();
+				table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "</span>").draw();
+
+			}
+
+		});
+
+		table.on('row-reordered', function (e, diff, edit) {
+			$(".save").show();
+	
+		
+			
+			
+			
+			// $('#result').html( 'Event result:<br>'+result );
+		});
+
+		$(".search-input").keyup(function () {
+			table.search($(this).val()).draw();
+		});
+
+		$('#example').on('draw.dt', function () {
+			$(".smSelect").select2().trigger('change');
+			$(".tt").html(table.column(9).data().sum());
+
+			$(".tt").html(parseFloat($(".tt").text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString() + '<i class="la la-try"></i>');
+			var data = table.rows().data();
+			console.log(data)
+
+			$('#example tbody  td:nth-child(1)').click(function () {
+
+			})
+			$('#example tbody  td:nth-child(2)').click(function () {
+				if ($(this).has("input").length) {
+					console.log("input zaten var.")
+				}
+				else {
+					var text = $(this).text();
+					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
+					$(".save").show();
+					$(this).find("input").trigger("focus")
+				}
+			})
+			$('#example tbody   td:nth-child(3)').click(function () {
+
+				if ($(this).has("input").length) {
+					console.log("input zaten var.")
+				}
+				else {
+
+					var text = $(this).text();
+					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
+					$(".save").show();
+					$(this).find("input").trigger("focus")
+
+				}
+			})
+			$('#example tbody   td:nth-child(5)').click(function () {
+
+				if ($(this).has("input").length) {
+					console.log("input zaten var.")
+				}
+				else {
+					var text = $(this).text();
+					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
+					$(".save").show();
+					$(this).find("input").trigger("focus")
+				}
+			})
+			$('#example tbody   td:nth-child(6)').click(function () {
+
+				if ($(this).has("select").length) {
+					console.log("input zaten var.")
+				}
+				else {
+					var text = $(this).text();
+					$(this).html("		<select name='one'  class='form-control form-control-sm' id='one'>" +
+						"<option value='18' >18%</option>" +
+						"<option value='5'>5%</option>" +
+						"</select>");
+					$(".save").show();
+					$(this).find("select").trigger("focus")
+
+				}
+
+
+			})
+			$('#example tbody   td:nth-child(7)').click(function () {
+
+				if ($(this).has("input").length) {
+					console.log("input zaten var.")
+				}
+				else {
+
+					var text = $(this).text();
+					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
+					$(".save").show();
+					$(this).find("input").trigger("focus")
+
+				}
+			})
+
+		});
+	});
+
+</script>
+</body>
+
+</html>
