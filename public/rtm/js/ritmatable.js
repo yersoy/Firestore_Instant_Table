@@ -16,12 +16,12 @@
             }; d.extend(m.prototype, {
                 fnUpdate: function () { this._fnDraw(!0) }, fnRedrawLayout: function () { this._fnColCalc(); this._fnGridLayout(); this.fnUpdate() }, fnRecalculateHeight: function (a) { delete a._DTTC_iHeight; a.style.height = "auto" }, fnSetRowHeight: function (a, b) {
                     a.style.height =
-                    b + "px"
+                        b + "px"
                 }, fnGetPosition: function (a) { var b = this.s.dt.oInstance; if (d(a).parents(".DTFC_Cloned").length) { if ("tr" === a.nodeName.toLowerCase()) return a = d(a).index(), b.fnGetPosition(d("tr", this.s.dt.nTBody)[a]); var c = d(a).index(), a = d(a.parentNode).index(); return [b.fnGetPosition(d("tr", this.s.dt.nTBody)[a]), c, b.oApi._fnVisibleToColumnIndex(this.s.dt, c)] } return b.fnGetPosition(a) }, _fnConstruct: function (a) {
                     var b = this; if ("function" != typeof this.s.dt.oInstance.fnVersionCheck || !0 !== this.s.dt.oInstance.fnVersionCheck("1.8.0")) alert("FixedColumns " +
                         m.VERSION + " required DataTables 1.8.0 or later. Please upgrade your DataTables installation"); else if ("" === this.s.dt.oScroll.sX) this.s.dt.oInstance.oApi._fnLog(this.s.dt, 1, "FixedColumns is not needed (no x-scrolling in DataTables enabled), so no action will be taken. Use 'FixedHeader' for column fixing when scrolling is not enabled"); else {
-                        this.s = d.extend(!0, this.s, m.defaults, a); a = this.s.dt.oClasses; this.dom.grid.dt = d(this.s.dt.nTable).parents("div." + a.sScrollWrapper)[0]; this.dom.scroller = d("div." +
-                            a.sScrollBody, this.dom.grid.dt)[0]; this._fnColCalc(); this._fnGridSetup(); var c, e = !1; d(this.s.dt.nTableWrapper).on("mousedown.DTFC", function (a) { 0 === a.button && (e = !0, d(r).one("mouseup", function () { e = !1 })) }); d(this.dom.scroller).on("mouseover.DTFC touchstart.DTFC", function () { e || (c = "main") }).on("scroll.DTFC", function (a) { !c && a.originalEvent && (c = "main"); if ("main" === c && (0 < b.s.iLeftColumns && (b.dom.grid.left.liner.scrollTop = b.dom.scroller.scrollTop), 0 < b.s.iRightColumns)) b.dom.grid.right.liner.scrollTop = b.dom.scroller.scrollTop });
+                            this.s = d.extend(!0, this.s, m.defaults, a); a = this.s.dt.oClasses; this.dom.grid.dt = d(this.s.dt.nTable).parents("div." + a.sScrollWrapper)[0]; this.dom.scroller = d("div." +
+                                a.sScrollBody, this.dom.grid.dt)[0]; this._fnColCalc(); this._fnGridSetup(); var c, e = !1; d(this.s.dt.nTableWrapper).on("mousedown.DTFC", function (a) { 0 === a.button && (e = !0, d(r).one("mouseup", function () { e = !1 })) }); d(this.dom.scroller).on("mouseover.DTFC touchstart.DTFC", function () { e || (c = "main") }).on("scroll.DTFC", function (a) { !c && a.originalEvent && (c = "main"); if ("main" === c && (0 < b.s.iLeftColumns && (b.dom.grid.left.liner.scrollTop = b.dom.scroller.scrollTop), 0 < b.s.iRightColumns)) b.dom.grid.right.liner.scrollTop = b.dom.scroller.scrollTop });
                             var f = "onwheel" in r.createElement("div") ? "wheel.DTFC" : "mousewheel.DTFC"; if (0 < b.s.iLeftColumns) d(b.dom.grid.left.liner).on("mouseover.DTFC touchstart.DTFC", function () { e || (c = "left") }).on("scroll.DTFC", function (a) { !c && a.originalEvent && (c = "left"); "left" === c && (b.dom.scroller.scrollTop = b.dom.grid.left.liner.scrollTop, 0 < b.s.iRightColumns && (b.dom.grid.right.liner.scrollTop = b.dom.grid.left.liner.scrollTop)) }).on(f, function (a) { b.dom.scroller.scrollLeft -= "wheel" === a.type ? -a.originalEvent.deltaX : a.originalEvent.wheelDeltaX });
                             if (0 < b.s.iRightColumns) d(b.dom.grid.right.liner).on("mouseover.DTFC touchstart.DTFC", function () { e || (c = "right") }).on("scroll.DTFC", function (a) { !c && a.originalEvent && (c = "right"); "right" === c && (b.dom.scroller.scrollTop = b.dom.grid.right.liner.scrollTop, 0 < b.s.iLeftColumns && (b.dom.grid.left.liner.scrollTop = b.dom.grid.right.liner.scrollTop)) }).on(f, function (a) { b.dom.scroller.scrollLeft -= "wheel" === a.type ? -a.originalEvent.deltaX : a.originalEvent.wheelDeltaX }); d(p).on("resize.DTFC", function () { b._fnGridLayout.call(b) });
                             var g = !0, h = d(this.s.dt.nTable); h.on("draw.dt.DTFC", function () { b._fnColCalc(); b._fnDraw.call(b, g); g = !1 }).on("column-sizing.dt.DTFC", function () { b._fnColCalc(); b._fnGridLayout(b) }).on("column-visibility.dt.DTFC", function (a, c, d, e, f) { if (f === t || f) b._fnColCalc(), b._fnGridLayout(b), b._fnDraw(!0) }).on("select.dt.DTFC deselect.dt.DTFC", function (a) { "dt" === a.namespace && b._fnDraw(!1) }).on("destroy.dt.DTFC", function () {
@@ -103,7 +103,7 @@
             }); s.Api.register("fixedColumns().cellIndex()", function (a) { a = d(a); if (a.parents(".DTFC_Cloned").length) { var b = a.parent().index(), b = this.rows({ page: "current" }).indexes()[b], a = a.parents(".DTFC_LeftWrapper").length ? a.index() : this.columns().flatten().length - this.context[0]._oFixedColumns.s.iRightColumns + a.index(); return { row: b, column: this.column.index("toData", a), columnVisible: a } } return this.cell(a).index() }); d(r).on("init.dt.fixedColumns", function (a, b) {
                 if ("dt" === a.namespace) {
                     var c = b.oInit.fixedColumns,
-                    e = s.defaults.fixedColumns; if (c || e) e = d.extend({}, c, e), !1 !== c && new m(b, e)
+                        e = s.defaults.fixedColumns; if (c || e) e = d.extend({}, c, e), !1 !== c && new m(b, e)
                 }
             }); d.fn.dataTable.FixedColumns = m; return d.fn.DataTable.FixedColumns = m
         });
@@ -118,11 +118,11 @@
             } var t = e.fn.dataTable; e.fn.dataTableExt.oApi.fnColReorder = function (a, b, c, f, g) {
                 var d, h, j, m, i, l = a.aoColumns.length, k; i = function (a, b, c) { if (a[b] && "function" !== typeof a[b]) { var d = a[b].split("."), f = d.shift(); isNaN(1 * f) || (a[b] = c[1 * f] + "." + d.join(".")) } }; if (b != c) if (0 > b || b >= l) this.oApi._fnLog(a, 1, "ColReorder 'from' index is out of bounds: " + b); else if (0 > c || c >= l) this.oApi._fnLog(a, 1, "ColReorder 'to' index is out of bounds: " +
                     c); else {
-                        j = []; d = 0; for (h = l; d < h; d++)j[d] = d; p(j, b, c); var n = q(j); d = 0; for (h = a.aaSorting.length; d < h; d++)a.aaSorting[d][0] = n[a.aaSorting[d][0]]; if (null !== a.aaSortingFixed) { d = 0; for (h = a.aaSortingFixed.length; d < h; d++)a.aaSortingFixed[d][0] = n[a.aaSortingFixed[d][0]] } d = 0; for (h = l; d < h; d++) { k = a.aoColumns[d]; j = 0; for (m = k.aDataSort.length; j < m; j++)k.aDataSort[j] = n[k.aDataSort[j]]; k.idx = n[k.idx] } e.each(a.aLastSort, function (b, c) { a.aLastSort[b].src = n[c.src] }); d = 0; for (h = l; d < h; d++)k = a.aoColumns[d], "number" == typeof k.mData ?
-                            k.mData = n[k.mData] : e.isPlainObject(k.mData) && (i(k.mData, "_", n), i(k.mData, "filter", n), i(k.mData, "sort", n), i(k.mData, "type", n)); if (a.aoColumns[b].bVisible) {
-                                i = this.oApi._fnColumnIndexToVisible(a, b); m = null; for (d = c < b ? c : c + 1; null === m && d < l;)m = this.oApi._fnColumnIndexToVisible(a, d), d++; j = a.nTHead.getElementsByTagName("tr"); d = 0; for (h = j.length; d < h; d++)s(j[d], i, m); if (null !== a.nTFoot) { j = a.nTFoot.getElementsByTagName("tr"); d = 0; for (h = j.length; d < h; d++)s(j[d], i, m) } d = 0; for (h = a.aoData.length; d < h; d++)null !== a.aoData[d].nTr &&
-                                    s(a.aoData[d].nTr, i, m)
-                            } p(a.aoColumns, b, c); d = 0; for (h = l; d < h; d++)a.oApi._fnColumnOptions(a, d, {}); p(a.aoPreSearchCols, b, c); d = 0; for (h = a.aoData.length; d < h; d++) { m = a.aoData[d]; if (k = m.anCells) { p(k, b, c); j = 0; for (i = k.length; j < i; j++)k[j] && k[j]._DT_CellIndex && (k[j]._DT_CellIndex.column = j) } "dom" !== m.src && e.isArray(m._aData) && p(m._aData, b, c) } d = 0; for (h = a.aoHeader.length; d < h; d++)p(a.aoHeader[d], b, c); if (null !== a.aoFooter) { d = 0; for (h = a.aoFooter.length; d < h; d++)p(a.aoFooter[d], b, c) } (g || g === r) && e.fn.dataTable.Api(a).rows().invalidate();
+                    j = []; d = 0; for (h = l; d < h; d++)j[d] = d; p(j, b, c); var n = q(j); d = 0; for (h = a.aaSorting.length; d < h; d++)a.aaSorting[d][0] = n[a.aaSorting[d][0]]; if (null !== a.aaSortingFixed) { d = 0; for (h = a.aaSortingFixed.length; d < h; d++)a.aaSortingFixed[d][0] = n[a.aaSortingFixed[d][0]] } d = 0; for (h = l; d < h; d++) { k = a.aoColumns[d]; j = 0; for (m = k.aDataSort.length; j < m; j++)k.aDataSort[j] = n[k.aDataSort[j]]; k.idx = n[k.idx] } e.each(a.aLastSort, function (b, c) { a.aLastSort[b].src = n[c.src] }); d = 0; for (h = l; d < h; d++)k = a.aoColumns[d], "number" == typeof k.mData ?
+                        k.mData = n[k.mData] : e.isPlainObject(k.mData) && (i(k.mData, "_", n), i(k.mData, "filter", n), i(k.mData, "sort", n), i(k.mData, "type", n)); if (a.aoColumns[b].bVisible) {
+                            i = this.oApi._fnColumnIndexToVisible(a, b); m = null; for (d = c < b ? c : c + 1; null === m && d < l;)m = this.oApi._fnColumnIndexToVisible(a, d), d++; j = a.nTHead.getElementsByTagName("tr"); d = 0; for (h = j.length; d < h; d++)s(j[d], i, m); if (null !== a.nTFoot) { j = a.nTFoot.getElementsByTagName("tr"); d = 0; for (h = j.length; d < h; d++)s(j[d], i, m) } d = 0; for (h = a.aoData.length; d < h; d++)null !== a.aoData[d].nTr &&
+                                s(a.aoData[d].nTr, i, m)
+                        } p(a.aoColumns, b, c); d = 0; for (h = l; d < h; d++)a.oApi._fnColumnOptions(a, d, {}); p(a.aoPreSearchCols, b, c); d = 0; for (h = a.aoData.length; d < h; d++) { m = a.aoData[d]; if (k = m.anCells) { p(k, b, c); j = 0; for (i = k.length; j < i; j++)k[j] && k[j]._DT_CellIndex && (k[j]._DT_CellIndex.column = j) } "dom" !== m.src && e.isArray(m._aData) && p(m._aData, b, c) } d = 0; for (h = a.aoHeader.length; d < h; d++)p(a.aoHeader[d], b, c); if (null !== a.aoFooter) { d = 0; for (h = a.aoFooter.length; d < h; d++)p(a.aoFooter[d], b, c) } (g || g === r) && e.fn.dataTable.Api(a).rows().invalidate();
                     d = 0; for (h = l; d < h; d++)e(a.aoColumns[d].nTh).off(".DT"), this.oApi._fnSortAttachListener(a, a.aoColumns[d].nTh, d); e(a.oInstance).trigger("column-reorder.dt", [a, { from: b, to: c, mapping: n, drop: f, iFrom: b, iTo: c, aiInvertMapping: n }])
                 }
             }; var i = function (a, b) {
@@ -167,10 +167,10 @@
                         }); for (var b = 0, c = this.s.aoTargets[0].x, f = 0, g = a.length; f < g; f++)f != this.s.mouse.fromIndex && b++ , a[f].bVisible && "none" !== a[f].nTh.style.display && (c += e(a[f].nTh).outerWidth(), this.s.aoTargets.push({ x: c, to: b })); 0 !== this.s.fixedRight && this.s.aoTargets.splice(this.s.aoTargets.length - this.s.fixedRight); 0 !== this.s.fixed && this.s.aoTargets.splice(0, this.s.fixed)
                     }, _fnCreateDragNode: function () {
                         var a = "" !== this.s.dt.oScroll.sX || "" !== this.s.dt.oScroll.sY, b = this.s.dt.aoColumns[this.s.mouse.targetIndex].nTh, c = b.parentNode,
-                        f = c.parentNode, g = f.parentNode, d = e(b).clone(); this.dom.drag = e(g.cloneNode(!1)).addClass("DTCR_clonedTable").append(e(f.cloneNode(!1)).append(e(c.cloneNode(!1)).append(d[0]))).css({ position: "absolute", top: 0, left: 0, width: e(b).outerWidth(), height: e(b).outerHeight() }).appendTo("body"); this.dom.pointer = e("<div></div>").addClass("DTCR_pointer").css({
-                            position: "absolute", top: a ? e("div.dataTables_scroll", this.s.dt.nTableWrapper).offset().top : e(this.s.dt.nTable).offset().top, height: a ? e("div.dataTables_scroll",
-                                this.s.dt.nTableWrapper).height() : e(this.s.dt.nTable).height()
-                        }).appendTo("body")
+                            f = c.parentNode, g = f.parentNode, d = e(b).clone(); this.dom.drag = e(g.cloneNode(!1)).addClass("DTCR_clonedTable").append(e(f.cloneNode(!1)).append(e(c.cloneNode(!1)).append(d[0]))).css({ position: "absolute", top: 0, left: 0, width: e(b).outerWidth(), height: e(b).outerHeight() }).appendTo("body"); this.dom.pointer = e("<div></div>").addClass("DTCR_pointer").css({
+                                position: "absolute", top: a ? e("div.dataTables_scroll", this.s.dt.nTableWrapper).offset().top : e(this.s.dt.nTable).offset().top, height: a ? e("div.dataTables_scroll",
+                                    this.s.dt.nTableWrapper).height() : e(this.s.dt.nTable).height()
+                            }).appendTo("body")
                     }, _fnSetColumnIndexes: function () { e.each(this.s.dt.aoColumns, function (a, b) { e(b.nTh).attr("data-column-index", a) }) }, _fnCursorPosition: function (a, b) { return -1 !== a.type.indexOf("touch") ? a.originalEvent.touches[0][b] : a[b] }
             }); i.defaults = { aiOrder: null, bEnable: !0, bRealtime: !0, iFixedColumnsLeft: 0, iFixedColumnsRight: 0, fnReorderCallback: null }; i.version = "1.5.1"; e.fn.dataTable.ColReorder = i; e.fn.DataTable.ColReorder = i; "function" == typeof e.fn.dataTable &&
                 "function" == typeof e.fn.dataTableExt.fnVersionCheck && e.fn.dataTableExt.fnVersionCheck("1.10.8") ? e.fn.dataTableExt.aoFeatures.push({ fnInit: function (a) { var b = a.oInstance; a._colReorder ? b.oApi._fnLog(a, 1, "ColReorder attempted to initialise twice. Ignoring second") : (b = a.oInit, new i(a, b.colReorder || b.oColReorder || {})); return null }, cFeature: "R", sFeature: "ColReorder" }) : alert("Warning: ColReorder requires DataTables 1.10.8 or greater - www.datatables.net/download"); e(l).on("preInit.dt.colReorder", function (a,
@@ -203,7 +203,7 @@
                         a + b.offsetTop, b = !0 === e ? b.offsetLeft : "number" === typeof e ? b.offsetLeft + e : c + b.offsetLeft; 0 > a ? a = 0 : a + this.s.domCloneOuterHeight > this.s.documentOuterHeight && (a = this.s.documentOuterHeight - this.s.domCloneOuterHeight); this.dom.clone.css({ top: a, left: b })
                 }, _emitEvent: function (c, b) { this.s.dt.iterator("table", function (a) { d(a.nTable).triggerHandler(c + ".dt", b) }) }, _eventToPage: function (c, b) { return -1 !== c.type.indexOf("touch") ? c.originalEvent.touches[0]["page" + b] : c["page" + b] }, _mouseDown: function (c, b) {
                     var a = this, e = this.s.dt,
-                    i = this.s.start, j = b.offset(); i.top = this._eventToPage(c, "Y"); i.left = this._eventToPage(c, "X"); i.offsetTop = j.top; i.offsetLeft = j.left; i.nodes = d.unique(e.rows({ page: "current" }).nodes().toArray()); this._cachePositions(); this._clone(b); this._clonePosition(c); this.dom.target = b; b.addClass("dt-rowReorder-moving"); d(g).on("mouseup.rowReorder touchend.rowReorder", function (b) { a._mouseUp(b) }).on("mousemove.rowReorder touchmove.rowReorder", function (b) { a._mouseMove(b) }); d(f).width() === d(g).width() && d(g.body).addClass("dt-rowReorder-noOverflow");
+                        i = this.s.start, j = b.offset(); i.top = this._eventToPage(c, "Y"); i.left = this._eventToPage(c, "X"); i.offsetTop = j.top; i.offsetLeft = j.left; i.nodes = d.unique(e.rows({ page: "current" }).nodes().toArray()); this._cachePositions(); this._clone(b); this._clonePosition(c); this.dom.target = b; b.addClass("dt-rowReorder-moving"); d(g).on("mouseup.rowReorder touchend.rowReorder", function (b) { a._mouseUp(b) }).on("mousemove.rowReorder touchmove.rowReorder", function (b) { a._mouseMove(b) }); d(f).width() === d(g).width() && d(g.body).addClass("dt-rowReorder-noOverflow");
                     e = this.dom.dtScroll; this.s.scroll = { windowHeight: d(f).height(), windowWidth: d(f).width(), dtTop: e.length ? e.offset().top : null, dtLeft: e.length ? e.offset().left : null, dtHeight: e.length ? e.outerHeight() : null, dtWidth: e.length ? e.outerWidth() : null }
                 }, _mouseMove: function (c) {
                     this._clonePosition(c); for (var b = this._eventToPage(c, "Y") - this.s.bodyTop, a = this.s.middles, e = null, i = this.s.dt, j = i.table().body(), g = 0, f = a.length; g < f; g++)if (b < a[g]) { e = g; break } null === e && (e = a.length); if (null === this.s.lastInsert || this.s.lastInsert !==
@@ -213,7 +213,7 @@
                     this.s.scrollInterval = null; var j = this.s.start.nodes, f = d.unique(b.rows({ page: "current" }).nodes().toArray()), k = {}, h = [], l = [], n = this.s.getDataFn, m = this.s.setDataFn; a = 0; for (e = j.length; a < e; a++)if (j[a] !== f[a]) { var o = b.row(f[a]).id(), s = b.row(f[a]).data(), p = b.row(j[a]).data(); o && (k[o] = n(p)); h.push({ node: f[a], oldData: n(s), newData: n(p), newPosition: a, oldPosition: d.inArray(f[a], j) }); l.push(f[a]) } var q = [h, { dataSrc: i, nodes: l, values: k, triggerRow: b.row(this.dom.target) }]; this._emitEvent("row-reorder", q); var r = function () {
                         if (c.c.update) {
                             a =
-                            0; for (e = h.length; a < e; a++) { var d = b.row(h[a].node).data(); m(d, h[a].newData); b.columns().every(function () { this.dataSrc() === i && b.cell(h[a].node, this.index()).invalidate("data") }) } c._emitEvent("row-reordered", q); b.draw(!1)
+                                0; for (e = h.length; a < e; a++) { var d = b.row(h[a].node).data(); m(d, h[a].newData); b.columns().every(function () { this.dataSrc() === i && b.cell(h[a].node, this.index()).invalidate("data") }) } c._emitEvent("row-reordered", q); b.draw(!1)
                         }
                     }; this.c.editor ? (this.c.enable = !1, this.c.editor.edit(l, !1, d.extend({ submit: "changed" }, this.c.formOptions)).multiSet(i, k).one("preSubmitCancelled.rowReorder", function () { c.c.enable = !0; c.c.editor.off(".rowReorder"); b.draw(!1) }).one("submitUnsuccessful.rowReorder", function () { b.draw(!1) }).one("submitSuccess.rowReorder",
                         function () { r() }).one("submitComplete", function () { c.c.enable = !0; c.c.editor.off(".rowReorder") }).submit()) : r()
@@ -222,10 +222,10 @@
                         setInterval(function () { if (a.windowVert) g.body.scrollTop = g.body.scrollTop + a.windowVert; if (a.dtVert) { var c = b.dom.dtScroll[0]; if (a.dtVert) c.scrollTop = c.scrollTop + a.dtVert } }, 20))
                 }
             }); k.defaults = { dataSrc: 0, editor: null, enable: !0, formOptions: {}, selector: "td:first-child", snapX: !1, update: !0, excludedChildren: "a" }; var l = d.fn.dataTable.Api; l.register("rowReorder()", function () { return this }); l.register("rowReorder.enable()", function (c) {
-            c === m && (c = !0); return this.iterator("table", function (b) {
-            b.rowreorder && (b.rowreorder.c.enable =
-                c)
-            })
+                c === m && (c = !0); return this.iterator("table", function (b) {
+                    b.rowreorder && (b.rowreorder.c.enable =
+                        c)
+                })
             }); l.register("rowReorder.disable()", function () { return this.iterator("table", function (c) { c.rowreorder && (c.rowreorder.c.enable = !1) }) }); k.version = "1.2.4"; d.fn.dataTable.RowReorder = k; d.fn.DataTable.RowReorder = k; d(g).on("init.dt.dtr", function (c, b) { if ("dt" === c.namespace) { var a = b.oInit.rowReorder, e = h.defaults.rowReorder; if (a || e) e = d.extend({}, a, e), !1 !== a && new k(b, e) } }); return k
         });
 
@@ -292,7 +292,7 @@
                     {
                         "targets": [1],
                         "orderable": false,
-                        "width": "1px",
+                        "width": "50px",
 
                     },
                     {
@@ -403,17 +403,17 @@
                 "scrollCollapse": settings.scrollCollapse,
                 "paging": settings.paging
             });
-         
+
             $('#example').on('click', '.la-times', function () {
                 $(".save").show();
                 var row = $(this).closest("tr");
                 var index = $(this).closest("tbody").find("tr").index(row);
-               table.row(row).remove().draw();
+                table.row(row).remove().draw();
 
                 table.rows().every(function (rowIdx, tableLoop, rowLoop) {
                     var data = this.data();
 
-                   table.cell(rowIdx, 0).data(rowIdx).draw();
+                    table.cell(rowIdx, 0).data(rowIdx).draw();
 
                     // ... do something with data(), or this.node(), etc
                 });
@@ -459,36 +459,42 @@
 
                 });
                 console.log("tabloda toplam " + data.length + " kayıt var ve " + lastindex);
-            if(data.length<=0){
-                table.row.add({
-                    "0": 0,
-                    "1": "<i class='la la-arrows-v '></i><i class='la la-times '></i>",
-                    "2": "#14124",
-                    "3": "ürün Hizmet",
-                    "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
-                    "5": "4235",
-                    "6": "18%",
-                    "7": "dolar",
-                    "8": "1",
-                    "9": "600",
+                if (data.length <= 0) {
+                    table.row.add({
+                        "0": 0,
+                        "1": "<div class='custom-control custom-checkbox form-check'>"+
+								"<input type='checkbox' class='custom-control-input' id='customCheck0' >"+
+								"<label class='custom-control-label' for='customCheck0'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
+							"</div>",
+                        "2": "#14124",
+                        "3": "ürün Hizmet",
+                        "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
+                        "5": "4235",
+                        "6": "18%",
+                        "7": "dolar",
+                        "8": "1",
+                        "9": "600",
 
-                }).draw();
-            }else{
-                table.row.add({
-                    "0": lastindex + 1,
-                    "1": "<i class='la la-arrows-v '></i><i class='la la-times '></i>",
-                    "2": "#14124",
-                    "3": "ürün Hizmet",
-                    "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
-                    "5": "4235",
-                    "6": "18%",
-                    "7": "dolar",
-                    "8": "1",
-                    "9": "600",
+                    }).draw();
+                } else {
+                    table.row.add({
+                        "0": data.length ,
+                        "1": "<div class='custom-control custom-checkbox form-check'>"+
+								"<input type='checkbox' class='custom-control-input' id='customCheck"+data.length +"' >"+
+								"<label class='custom-control-label' for='customCheck"+data.length +"'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
+							"</div>",
+                        "2": "#14124",
+                        "3": "ürün Hizmet",
+                        "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
+                        "5": "4235",
+                        "6": "18%",
+                        "7": "dolar",
+                        "8": "1",
+                        "9": "600",
 
-                }).draw();
-            }
-                
+                    }).draw();
+                }
+
                 //firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
 
 

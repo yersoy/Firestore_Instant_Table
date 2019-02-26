@@ -33,7 +33,8 @@
 	<link rel="stylesheet" href="../assets/css/layouts/vertical/themes/theme-a.css">
 	<link rel="stylesheet" type="text/css"
 		href="https://cdn.datatables.net/rowreorder/1.2.4/css/rowReorder.bootstrap4.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 
 	<!-- update the version number as needed -->
 	<script defer src="/__/firebase/5.8.3/firebase-app.js"></script>
@@ -150,7 +151,8 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn-outline" data-dismiss="modal">İptal</button>
+							<button type="button" class="btn btn-secondary btn-outline"
+								data-dismiss="modal">İptal</button>
 							<button type="button" class="btn btn-primary" id="saveComment">Yorum Ekle</button>
 						</div>
 					</div>
@@ -160,6 +162,7 @@
 				<button class="btn btn-info  save" style="display: none">Kaydet</button>
 				<button class="btn btn-secondary" id="new-column">Yeni Satır Ekle</button>
 				<button class="btn btn-secondary" id="new-group">Grup Satırı Ekle</button>
+				<button class="btn btn-danger" id="delete-rows">Seçilenleri Sil</button>
 
 				<div class="col-md-4 pull-right p-r-0">
 					<div class="input-group mb-2">
@@ -177,12 +180,12 @@
 					<div class="card">
 						<div class="card-body">
 
-
+							
 							<table id="example" class="table table-sm" style="width:100%">
 								<thead>
 									<tr>
 										<th>seq</th>
-										<th width="10px" style="width: 10px "><i class="la la-arrows-v"></i></th>
+										<th width="10px" style="width: 100px "><div class="custom-control custom-checkbox form-check" style="    height: 27px;"><input type="checkbox" class="custom-control-input" id="customCheck-1"><label class="custom-control-label" for="customCheck-1"> </label></div></th>
 										<th width="100px">Ürün&nbsp;Kodu</th>
 										<th>Ürün&nbsp;&&nbsp;Hizmet</th>
 										<th width="20px" style="width: 20px"> </th>
@@ -218,8 +221,8 @@
 
 				<div class="col-md-12">
 					<div class="card">
-						<h5 class="card-header"><button class="btn btn-info" data-toggle="modal" data-target="#modal-yorum"><i
-									class="la la-plus text-white"></i> Yeni Yorum</button>
+						<h5 class="card-header"><button class="btn btn-info" data-toggle="modal"
+								data-target="#modal-yorum"><i class="la la-plus text-white"></i> Yeni Yorum</button>
 							<small class="text-info pull-right p-t-10">Yorumlar Gerçek Zamanlı
 								Kaydedilmektedir..</small> </h5>
 						<div class="card-body">
@@ -317,10 +320,36 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
+	
 		var table = $("#example").RitmaTable({
 			"scrollX": true, "scrollY": "500px", "rowReorder": true, "search": "#rtmsearch", "addColumn": "#new-column"
 		});
+	
+         $("#delete-rows").click(function(){
+			$(".save").show();
+                
+			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var data = this.data();
+					var datastring=data[1];                 
+					
+					
 
+var object=$('<div/>').html(datastring).contents();
+if(object.find("input").attr("checked")){
+	table.row(rowIdx).remove();
+}
+table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var data = this.data();
+                table.cell(rowIdx,)
+                   table.cell(rowIdx, 0).data(rowIdx).draw();
+
+                    // ... do something with data(), or this.node(), etc
+            });
+                    // ... do something with data(), or this.node(), etc
+                });
+
+              
+		 });
 		$("#saveComment").click(function () {
 			var d = new Date();
 
@@ -362,7 +391,7 @@
 
 
 		});
-	
+
 		$("#new-group").click(function () {
 			var data = table
 				.rows()
@@ -378,28 +407,29 @@
 			//firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
 			$(".save").show();
 		})
-		function updateTable(id){
-		var cel=table.cell(id, 0).data(id).draw();
+		function updateTable(id) {
+			var cel = table.cell(id, 0).data(id).draw();
 			console.log(cel)
 		}
 		$(".save").click(function () {
-			
-			table.cells().every(function (rowIndex, colmnIndex,tableLoop,cellLoop) {
+
+			table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
 				var node = $(this.node());
 
-
 				if (node.find(".changed").length > 0) {
-                   
+
 					table.cell(rowIndex, colmnIndex).data(node.find(".changed").text());
-					 if(colmnIndex==5){
-               	table.cell(rowIndex, colmnIndex).data(parseFloat(node.text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-               		
-               }
+					
+					if (colmnIndex == 5) {
+						table.cell(rowIndex, colmnIndex).data(parseFloat(node.text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+
+					}
+
 				}
 				this.invalidate();
 			});
-		
-	        table.draw();
+
+			table.draw();
 			var tableData = table.rows().data();
 			var serverdata = [];
 			console.log(table.data());
@@ -436,18 +466,18 @@
 
 			}
 
-
-
-
 			$('.tooltip').stop().fadeOut(200);
 
 		});
 		var s = "";
 		$('#example').on('focus', '.change', function () {
-			s = $(this).val();
-		});
-		$('#example').on('click', '.save', function () {
+			if ($(this).has("input")) {
+				s = $(this).val();
 
+			} else if ($(this).has("select")) {
+				s = $(this).val();
+				alert(s)
+			}
 		});
 
 		$(document).on('click', function (e) {
@@ -457,36 +487,75 @@
 
 		});
 		$('#example').on('focusout', '.change', function () {
-			if (s == $(this).val()) {
-				var cell = $(this).parent();
-				table.cell(cell).data($(this).val()).draw();
-			} else {
-				var cell = $(this).parent();
-				table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "</span>").draw();
+			if ($(this).has("input")) {
+				if (s == $(this).val()) {
+					var cell = $(this).parent();
+					table.cell(cell).data($(this).val()).draw();
+				} else {
+					var cell = $(this).parent();
+					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "</span>").draw();
+				}
 
+			} else if ($(this).has("select")) {
+				if (s == $(this).val()) {
+					var cell = $(this).parent();
+					table.cell(cell).data($(this).val() + "%").draw();
+				} else {
+					var cell = $(this).parent();
+					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "%</span>").draw();
+				}
 			}
 
 		});
 
-	
-table.on( 'row-reorder', function ( e, diff, edit ) {
-	$(".save").show();
-        var result = 'Reorder started on row: '+edit.triggerRow.data()[1]+'<br>';
- 
-        for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
-            var rowData = table.row( diff[i].node ).data();
- 
-            result += rowData[1]+' updated to be in position '+
-                diff[i].newData+' (was '+diff[i].oldData+')<br>';
-        }
- 
-        $('#result').html( 'Event result:<br>'+result );
-    } );
+		table.on('row-reorder', function (e, diff, edit) {
+			$(".save").show();
+			var result = 'Reorder started on row: ' + edit.triggerRow.data()[1] + '<br>';
+
+			for (var i = 0, ien = diff.length; i < ien; i++) {
+				var rowData = table.row(diff[i].node).data();
+
+				result += rowData[1] + ' updated to be in position ' +
+					diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
+			}
+
+			$('#result').html('Event result:<br>' + result);
+		});
+
 		$(".search-input").keyup(function () {
 			table.search($(this).val()).draw();
 		});
 
 		$('#example').on('draw.dt', function () {
+			$(".custom-checkbox input").click(function(){
+				$(this).attr("checked",true);
+				 var row=$(this).closest("tr").index();
+				 table.cell(row,1).data("<div class='custom-control custom-checkbox form-check'>"+
+								"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck"+row+"' >"+
+								"<label class='custom-control-label' for='customCheck"+row+"'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
+							"</div>",)
+		
+
+		});
+			$(document).off('dblclick', ".btn-exp");
+			$(".btn-exp").off('dblclick');
+			$(".btn-exp").unbind('dblclick');
+			$(document).on('dblclick', ".btn-exp", function (e) {
+$(".save").show();
+				e.preventDefault();
+		$("[data-toggle='tooltip']").popover('hide');
+			$("[data-toggle='tooltip']").popover('toggle');
+var row=$(this).closest("tr");
+var column=$(this).parent("td");
+
+		
+var person = prompt("Lütfen Açıklamanızı Giriniz", "Harry Potter");
+
+table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='"+person+"'>A</button>").draw()
+
+				});
+				
+
 			$(".smSelect").select2().trigger('change');
 			$(".tt").html(table.column(9).data().sum());
 
@@ -514,13 +583,13 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 					console.log("input zaten var.")
 				}
 				else {
-
 					var text = $(this).text();
 					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
 					$(".save").show();
 					$(this).find("input").trigger("focus")
 
 				}
+
 			})
 			$('#example tbody   td:nth-child(5)').click(function () {
 
@@ -529,7 +598,7 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 				}
 				else {
 					var text = $(this).text();
-					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
+					$(this).html("<input type='number' class='form-control form-control-sm change b-info' value='" + text + "' />");
 					$(".save").show();
 					$(this).find("input").trigger("focus")
 				}
@@ -541,15 +610,13 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 				}
 				else {
 					var text = $(this).text();
-					$(this).html("		<select name='one'  class='form-control form-control-sm' id='one'>" +
-						"<option value='18' >18%</option>" +
-						"<option value='5'>5%</option>" +
+					$(this).html("		<select name='one' style='width:60px'  class='form-control  form-control-sm change' id='one' style='font-size:10px'>" +
+						"<option value='18%' >18%</option>" +
+						"<option value='5%'>5%</option>" +
 						"</select>");
 					$(".save").show();
 					$(this).find("select").trigger("focus")
-
 				}
-
 
 			})
 			$('#example tbody   td:nth-child(7)').click(function () {
@@ -558,13 +625,13 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 					console.log("input zaten var.")
 				}
 				else {
-
 					var text = $(this).text();
-					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
+					$(this).html("<input type='number' class='form-control form-control-sm change b-info' value='" + text + "' />");
 					$(".save").show();
 					$(this).find("input").trigger("focus")
 
 				}
+				
 			})
 
 		});
