@@ -338,13 +338,11 @@ var object=$('<div/>').html(datastring).contents();
 if(object.find("input").attr("checked")){
 	table.row(rowIdx).remove();
 }
-table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-                    var data = this.data();
-                table.cell(rowIdx,)
-                   table.cell(rowIdx, 0).data(rowIdx).draw();
-
-                    // ... do something with data(), or this.node(), etc
-            });
+table.cell(rowIdx, 0).data(rowIdx).draw();
+				   table.cell(rowIdx, 1).data("<div class='custom-control custom-checkbox form-check'>"+
+								"<input type='checkbox' class='custom-control-input' id='customCheck"+rowIdx+"' >"+
+								"<label class='custom-control-label' for='customCheck"+rowIdx+"'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
+							"</div>").draw();
                     // ... do something with data(), or this.node(), etc
                 });
 
