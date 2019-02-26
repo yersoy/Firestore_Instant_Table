@@ -403,21 +403,21 @@
                 "scrollCollapse": settings.scrollCollapse,
                 "paging": settings.paging
             });
-            function updateTable(id) {
-                var cel = table.cell(id, 0).data(id).draw();
-                console.log(cel)
-            }
+         
             $('#example').on('click', '.la-times', function () {
                 $(".save").show();
                 var row = $(this).closest("tr");
                 var index = $(this).closest("tbody").find("tr").index(row);
+               table.row(row).remove().draw();
+
                 table.rows().every(function (rowIdx, tableLoop, rowLoop) {
                     var data = this.data();
 
-                    updateTable(rowIdx)
+                   table.cell(rowIdx, 0).data(rowIdx).draw();
 
                     // ... do something with data(), or this.node(), etc
                 });
+
                 // //silme fonksiyonu
                 // firebase.database().ref('body').orderByChild("0").equalTo(parseInt(index)).once("value").then(function(snapshot) {
 
@@ -437,7 +437,6 @@
                 // });
                 // });
 
-                return table.row(row).remove().draw();
             });
             $(settings.search).on('keyup change', function () {
                 return table.search(this.value).draw();
@@ -460,7 +459,21 @@
 
                 });
                 console.log("tabloda toplam " + data.length + " kayıt var ve " + lastindex);
+            if(data.length<=0){
+                table.row.add({
+                    "0": 0,
+                    "1": "<i class='la la-arrows-v '></i><i class='la la-times '></i>",
+                    "2": "#14124",
+                    "3": "ürün Hizmet",
+                    "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
+                    "5": "4235",
+                    "6": "18%",
+                    "7": "dolar",
+                    "8": "1",
+                    "9": "600",
 
+                }).draw();
+            }else{
                 table.row.add({
                     "0": lastindex + 1,
                     "1": "<i class='la la-arrows-v '></i><i class='la la-times '></i>",
@@ -474,6 +487,8 @@
                     "9": "600",
 
                 }).draw();
+            }
+                
                 //firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
 
 

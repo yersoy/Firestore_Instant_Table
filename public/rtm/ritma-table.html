@@ -384,22 +384,22 @@
 		}
 		$(".save").click(function () {
 			
-			table.cells().every(function (rowIndex, colmnIndex) {
+			table.cells().every(function (rowIndex, colmnIndex,tableLoop,cellLoop) {
 				var node = $(this.node());
-				if (node.find(".changed").length > 0) {
 
-					table.cell(rowIndex, colmnIndex).data(node.find(".changed").text()).draw();
+
+				if (node.find(".changed").length > 0) {
+                   
+					table.cell(rowIndex, colmnIndex).data(node.find(".changed").text());
+					 if(colmnIndex==5){
+               	table.cell(rowIndex, colmnIndex).data(parseFloat(node.text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+               		
+               }
 				}
+				this.invalidate();
 			});
-			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-				var data = this.data();
 		
-					updateTable(rowIdx)
-		
-				// ... do something with data(), or this.node(), etc
-			});
-			
-	
+	        table.draw();
 			var tableData = table.rows().data();
 			var serverdata = [];
 			console.log(table.data());
@@ -410,7 +410,7 @@
 			}
 			console.log(serverdata)
 			firebase.database().ref("body").set(serverdata)
-			notifyMe("Ritma Table Verileri Başarı İle Kaydedildi..");
+			//notifyMe("Ritma Table Verileri Başarı İle Kaydedildi..");
 			$(".save").hide();
 		});
 		firebase.database().ref('body').on('value', snap => {
@@ -427,11 +427,11 @@
 					snap.val()[index][2],
 					snap.val()[index][3],
 					snap.val()[index][4],
-					parseFloat(snap.val()[index][5], 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString(),
+					snap.val()[index][5],
 					snap.val()[index][6],
 					snap.val()[index][7],
 					snap.val()[index][8],
-					parseFloat(snap.val()[index][9], 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString(),
+					snap.val()[index][9],
 				]).draw();
 
 			}
@@ -468,16 +468,20 @@
 
 		});
 
-		table.on('row-reordered', function (e, diff, edit) {
-			$(".save").show();
 	
-		
-			
-			
-			
-			// $('#result').html( 'Event result:<br>'+result );
-		});
-
+table.on( 'row-reorder', function ( e, diff, edit ) {
+	$(".save").show();
+        var result = 'Reorder started on row: '+edit.triggerRow.data()[1]+'<br>';
+ 
+        for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
+            var rowData = table.row( diff[i].node ).data();
+ 
+            result += rowData[1]+' updated to be in position '+
+                diff[i].newData+' (was '+diff[i].oldData+')<br>';
+        }
+ 
+        $('#result').html( 'Event result:<br>'+result );
+    } );
 		$(".search-input").keyup(function () {
 			table.search($(this).val()).draw();
 		});
