@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Ritma Table Canlı Yapım Aşaması</title>
-    <meta name="description" content="Ritma Flex'in Yeni Tablosu RitmaTable">
+	<meta name="description" content="Ritma Flex'in Yeni Tablosu RitmaTable">
 	<!-- ================== GOOGLE FONTS ==================-->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet">
 	<!-- ======================= GLOBAL VENDOR STYLES ========================-->
@@ -160,10 +160,13 @@
 				</div>
 			</div>
 			<div class="p-t-0 p-l-0 p-r-0">
+				<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b>1 Adet
+						Seçildi</b></h5>
+				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
+					style="display: none">Seçilenleri Sil</button>
 				<button class="btn btn-info  save" style="display: none">Kaydet</button>
 				<button class="btn btn-secondary" id="new-column">Yeni Satır Ekle</button>
 				<button class="btn btn-secondary" id="new-group">Grup Satırı Ekle</button>
-				<button class="btn btn-danger" id="delete-rows">Seçilenleri Sil</button>
 
 				<div class="col-md-4 pull-right p-r-0">
 					<div class="input-group mb-2">
@@ -179,14 +182,19 @@
 
 				<div class="col-12">
 					<div class="card">
-						<div class="card-body">
+						<div class="card-body p-0">
 
-							
+
 							<table id="example" class="table table-sm" style="width:100%">
 								<thead>
 									<tr>
 										<th>seq</th>
-										<th width="10px" style="width: 100px "><div class="custom-control custom-checkbox form-check" style="    height: 27px;"><input type="checkbox" class="custom-control-input" id="customCheck-1"><label class="custom-control-label" for="customCheck-1"> </label></div></th>
+										<th width="10px" style="width: 100px ">
+											<div class="custom-control custom-checkbox form-check all-check"
+												style="    height: 27px;"><input type="checkbox"
+													class="custom-control-input" id="customCheck-1"><label
+													class="custom-control-label" for="customCheck-1"> </label></div>
+										</th>
 										<th width="100px">Ürün&nbsp;Kodu</th>
 										<th>Ürün&nbsp;&&nbsp;Hizmet</th>
 										<th width="20px" style="width: 20px"> </th>
@@ -202,24 +210,48 @@
 
 								</tbody>
 							</table>
-							<table class="table table-sm pull-right" style="width: 300px">
-								<tr>
-									<td>Toplam</td>
-									<td class="tt text-right"></td>
-								</tr>
-								<tr>
-									<td>İndirim</td>
-									<td class="text-right">400.00 <i class="la la-try"></i></td>
-								</tr>
-								<tr>
-									<td>Genel Toplam</td>
-									<td class="text-right gt">3,205.00 <i class="la la-try"></i></td>
-								</tr>
-							</table>
+
 						</div>
 					</div>
 				</div>
+				<div class="col-md-6"></div>
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="icon-rounded icon-rounded-success float-left m-r-20" style="    width: 70px;
+									  height: 70px;">
+								<i class="la la-dollar f-w-600 font-size-45"></i>
+							</div>
+							<h6 class="text-muted  ">Toplam <span class=" pull-right">558.16 <i
+										class="la la-dollar"></i></span></h6>
+							<h6 class="text-muted m-t-10 m-b-5">
+								İndirim <span class="pull-right">74.42<i class="la la-dollar"></i> </span>
+							</h6>
+							<h6 style="position:relative;top:5px;">Genel Toplam <span class="gt pull-right">484.0<i
+										class="la la-dollar"></i> </span></h6>
 
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="icon-rounded icon-rounded-info float-left m-r-20" style="    width: 70px;
+								height: 70px;">
+								<i class="la la-try f-w-600 font-size-45"></i>
+							</div>
+							<h6 class="text-muted  ">Toplam <span class="tt pull-right"></span></h6>
+							<h6 class="text-muted m-t-10 m-b-5">
+								İndirim <span class="pull-right">400.0<i class="la la-try"></i> </span>
+							</h6>
+							<h6 style="position:relative;top:5px;">Genel Toplam <span class="gt pull-right">2,600.0<i
+										class="la la-try"></i> </span></h6>
+
+						</div>
+
+					</div>
+				</div>
 				<div class="col-md-12">
 					<div class="card">
 						<h5 class="card-header"><button class="btn btn-info" data-toggle="modal"
@@ -259,6 +291,28 @@
 	<script src="../assets/js/global/app.js"></script>
 	<!-- ================== PAGE LEVEL APP SCRIPTS ==================-->
 	<script src="../assets/js/components/select2-init.js"></script>
+	<div class="modal fade" id="modalExp" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel9">Açıklama Giriniz</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true" class="zmdi zmdi-close"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="exampleFormControlTextarea">Açıklama Giriniz</label>
+						<textarea class="form-control" id="exampleFormControlTextarea" rows="3"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary btn-outline" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="saveExp">Kaydet</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script src="../assets/js/components/datatables-init.js"></script>
 
@@ -321,34 +375,46 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-	
+
 		var table = $("#example").RitmaTable({
 			"scrollX": true, "scrollY": "500px", "rowReorder": true, "search": "#rtmsearch", "addColumn": "#new-column"
 		});
-	
-         $("#delete-rows").click(function(){
+
+		$("#delete-rows").click(function () {
+				$(".delete-row-btns").hide();
+				$("#new-column").show();
+				$("#new-group").show();
 			$(".save").show();
-                
+
 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-                    var data = this.data();
-					var datastring=data[1];                 
-					
-					
+				var data = this.data();
+				if(data){
+					console.log(data)
+				var datastring = data[1];
+				var object = $('<div/>').html(datastring).contents();
 
-var object=$('<div/>').html(datastring).contents();
-if(object.find("input").attr("checked")){
-	table.row(rowIdx).remove();
-}
-table.cell(rowIdx, 0).data(rowIdx).draw();
-				   table.cell(rowIdx, 1).data("<div class='custom-control custom-checkbox form-check'>"+
-								"<input type='checkbox' class='custom-control-input' id='customCheck"+rowIdx+"' >"+
-								"<label class='custom-control-label' for='customCheck"+rowIdx+"'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
-							"</div>").draw();
-                    // ... do something with data(), or this.node(), etc
-                });
+                
 
-              
-		 });
+				 if (object.find("input").prop("checked")==true) {
+				 	table.row(rowIdx).remove().draw();
+				
+				 }
+				}
+			
+				
+				 //... do something with data(), or this.node(), etc
+			});
+			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+				table.cell(rowIdx, 0).data(rowIdx);
+				table.cell(rowIdx, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+				 	"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIdx + "' >" +
+				 	"<label class='custom-control-label' for='customCheck" + rowIdx + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+				 	"</div>");
+			});
+			
+table.draw();
+
+		});
 		$("#saveComment").click(function () {
 			var d = new Date();
 
@@ -418,7 +484,7 @@ table.cell(rowIdx, 0).data(rowIdx).draw();
 				if (node.find(".changed").length > 0) {
 
 					table.cell(rowIndex, colmnIndex).data(node.find(".changed").text());
-					
+
 					if (colmnIndex == 5) {
 						table.cell(rowIndex, colmnIndex).data(parseFloat(node.text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
 
@@ -526,34 +592,97 @@ table.cell(rowIdx, 0).data(rowIdx).draw();
 		});
 
 		$('#example').on('draw.dt', function () {
-			$(".custom-checkbox input").click(function(){
-				$(this).attr("checked",true);
-				 var row=$(this).closest("tr").index();
-				 table.cell(row,1).data("<div class='custom-control custom-checkbox form-check'>"+
-								"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck"+row+"' >"+
-								"<label class='custom-control-label' for='customCheck"+row+"'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
-							"</div>",)
-		
-
-		});
-			$(document).off('dblclick', ".btn-exp");
-			$(".btn-exp").off('dblclick');
-			$(".btn-exp").unbind('dblclick');
-			$(document).on('dblclick', ".btn-exp", function (e) {
-$(".save").show();
-				e.preventDefault();
-		$("[data-toggle='tooltip']").popover('hide');
-			$("[data-toggle='tooltip']").popover('toggle');
-var row=$(this).closest("tr");
-var column=$(this).parent("td");
-
-		
-var person = prompt("Lütfen Açıklamanızı Giriniz", "Harry Potter");
-
-table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='"+person+"'>A</button>").draw()
-
+			$("[data-toggle='tooltip']").popover({
+				html: true,
+				trigger: 'manual',
+				container: $(this).attr('id'),
+				placement: 'top',
+				content: function () {
+					$return = '<div class="hover-hovercard"></div>';
+				}
+			}).on("mouseenter", function () {
+				var _this = this;
+				$(this).popover("show");
+				$(this).siblings(".popover").on("mouseleave", function () {
+					$(_this).popover('hide');
 				});
-				
+			}).on("mouseleave", function () {
+				var _this = this;
+				setTimeout(function () {
+					if (!$(".popover:hover").length) {
+						$(_this).popover("hide")
+					}
+				}, 100);
+			});
+			$(".all-check input").click(function () {
+			
+			
+
+				var row = $(this).closest("tr").index();
+				// table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+				// 	"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + row + "' >" +
+				// 	"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+				// 	"</div>")
+
+
+			});
+			$(document).off('click', "tbody .custom-checkbox input");
+			$("tbody .custom-checkbox input").off('click');
+			$("tbody .custom-checkbox input").unbind('click');
+			$("tbody .custom-checkbox input").click(function () {
+			var row=$(this).closest("tr").index();
+			var cell=$(this).closest("td").index();
+		
+			
+				$(".delete-row-btns").show();
+				$("#new-column").hide();
+				$("#new-group").hide();
+                if($(this).prop("checked")){
+
+					
+					table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+					"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + row + "' >" +
+					"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+					"</div>")
+
+
+				}else if($(this).prop("checked")==false){
+					
+					table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+					"<input type='checkbox'  class='custom-control-input' id='customCheck" + row + "' >" +
+					"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+					"</div>")
+
+				}
+			  });
+			$(document).off('click', ".btn-exp");
+			$(".btn-exp").off('click');
+			$(".btn-exp").unbind('click');
+			$(document).on('click', ".btn-exp", function (e) {
+				$("[data-toggle='tooltip']").popover('hide');
+
+
+				$(".save").show();
+				$("#modalExp").modal();
+				e.preventDefault();
+
+				var row = $(this).closest("tr");
+				var column = $(this).parent("td");
+				sessionStorage.setItem("row", row);
+				sessionStorage.setItem("column", column);
+				$(document).on('click', "#saveExp", function (e) {
+
+					table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw();
+					$('#modalExp').modal('hide');
+				});
+
+				//$("#exampleFormControlTextarea1").text( );
+				//	 alert(row.find("td:eq(3)").attr("data-content"))
+
+				//table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + person + "'>A</button>").draw()
+
+			});
+
 
 			$(".smSelect").select2().trigger('change');
 			$(".tt").html(table.column(9).data().sum());
@@ -630,7 +759,7 @@ table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-ex
 					$(this).find("input").trigger("focus")
 
 				}
-				
+
 			})
 
 		});
