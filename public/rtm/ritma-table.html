@@ -11,7 +11,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet">
 	<!-- ======================= GLOBAL VENDOR STYLES ========================-->
 	<link rel="stylesheet" href="../assets/css/vendor/bootstrap.css">
-	
+
 	<link rel="stylesheet" href="../assets/css/icons/line-awesome.min.css">
 	<!-- ======================= DRIP ICONS ===================================-->
 
@@ -30,8 +30,7 @@
 	<link rel="stylesheet" href="../assets/css/layouts/vertical/themes/theme-a.css">
 	<link rel="stylesheet" type="text/css"
 		href="https://cdn.datatables.net/rowreorder/1.2.4/css/rowReorder.bootstrap4.min.css">
-	<link rel="stylesheet" type="text/css"
-		href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 
 	<!-- update the version number as needed -->
 	<script defer src="/__/firebase/5.8.3/firebase-app.js"></script>
@@ -148,23 +147,35 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn-outline"
-								data-dismiss="modal">İptal</button>
+							<button type="button" class="btn btn-secondary btn-outline" data-dismiss="modal">İptal</button>
 							<button type="button" class="btn btn-primary" id="saveComment">Yorum Ekle</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="p-t-0 p-l-0 p-r-0">
+				<div class="btn-group group-toolbar" role="group" aria-label="Basic example">
+					<button type="button" class="btn btn-secondary"><i class="la la-barcode"></i> Ürün</button>
+					<button type="button" class="btn btn-secondary" id="new-column"> <i class="la la-indent"></i> Yeni
+						Satır</button>
+					<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-bold"></i> Başlık Ekle</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara Toplam</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-comment"></i> Yorum Ekle</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-file-text"></i> Sayfa Sonu </button>
+					<button type="button" class="btn btn-secondary"><i class="la la-plus"></i> Boş Satır</button>
+
+
+
+
+				</div>
 				<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b>1 Adet
 						Seçildi</b></h5>
-				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
-					style="display: none">Seçilenleri Sil</button>
+				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows" style="display: none">Seçilenleri
+					Sil</button>
 				<button class="btn btn-info  save" style="display: none">Kaydet</button>
-				<button class="btn btn-secondary" id="new-column">Yeni Satır Ekle</button>
-				<button class="btn btn-secondary" id="new-group">Grup Satırı Ekle</button>
 
-				<div class="col-md-4 pull-right p-r-0">
+
+				<div class="col-md-2 pull-right p-r-0">
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<div class="input-group-text"><i class="la la-search"></i></div>
@@ -186,9 +197,8 @@
 									<tr>
 										<th>seq</th>
 										<th width="10px" style="width: 100px ">
-											<div class="custom-control custom-checkbox form-check all-check"
-												style="    height: 27px;"><input type="checkbox"
-													class="custom-control-input" id="customCheck-1"><label
+											<div class="custom-control custom-checkbox form-check all-check" style="    height: 27px;"><input
+													type="checkbox" class="custom-control-input" id="customCheck-1"><label
 													class="custom-control-label" for="customCheck-1"> </label></div>
 										</th>
 										<th width="100px">Ürün&nbsp;Kodu</th>
@@ -210,16 +220,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
+				<div class="col-lg-6"></div>
+				<div class="col-md-6 col-sm-6 col-lg-3">
 					<div class="card">
 						<div class="card-body">
 							<div class="icon-rounded icon-rounded-success float-left m-r-20" style="    width: 70px;
 									  height: 70px;">
 								<i class="la la-dollar f-w-600 font-size-45"></i>
 							</div>
-							<h6 class="text-muted  ">Toplam <span class=" pull-right">558.16 <i
-										class="la la-dollar"></i></span></h6>
+							<h6 class="text-muted  ">Toplam <span class=" pull-right">558.16 <i class="la la-dollar"></i></span></h6>
 							<h6 class="text-muted m-t-10 m-b-5">
 								İndirim <span class="pull-right">74.42<i class="la la-dollar"></i> </span>
 							</h6>
@@ -230,7 +239,7 @@
 
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-6 col-sm-6 col-lg-3">
 					<div class="card">
 						<div class="card-body">
 							<div class="icon-rounded icon-rounded-info float-left m-r-20" style="    width: 70px;
@@ -250,8 +259,8 @@
 				</div>
 				<div class="col-md-12">
 					<div class="card">
-						<h5 class="card-header"><button class="btn btn-info" data-toggle="modal"
-								data-target="#modal-yorum"><i class="la la-plus text-white"></i> Yeni Yorum</button>
+						<h5 class="card-header"><button class="btn btn-info" data-toggle="modal" data-target="#modal-yorum"><i
+									class="la la-plus text-white"></i> Yeni Yorum</button>
 							<small class="text-info pull-right p-t-10">Yorumlar Gerçek Zamanlı
 								Kaydedilmektedir..</small> </h5>
 						<div class="card-body">
@@ -377,38 +386,39 @@
 		});
 
 		$("#delete-rows").click(function () {
-				$(".delete-row-btns").hide();
-				$("#new-column").show();
-				$("#new-group").show();
+			$(".delete-row-btns").hide();
+			$("#new-column").show();
+			$("#new-group").show();
+			$('.group-toolbar').show();
 			$(".save").show();
 
 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
 				var data = this.data();
-				if(data){
+				if (data) {
 					console.log(data)
-				var datastring = data[1];
-				var object = $('<div/>').html(datastring).contents();
+					var datastring = data[1];
+					var object = $('<div/>').html(datastring).contents();
 
-                
 
-				 if (object.find("input").prop("checked")==true) {
-				 	table.row(rowIdx).remove().draw();
-				
-				 }
+
+					if (object.find("input").prop("checked") == true) {
+						table.row(rowIdx).remove().draw();
+
+					}
 				}
-			
-				
-				 //... do something with data(), or this.node(), etc
+
+
+				//... do something with data(), or this.node(), etc
 			});
 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
 				table.cell(rowIdx, 0).data(rowIdx);
 				table.cell(rowIdx, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-				 	"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIdx + "' >" +
-				 	"<label class='custom-control-label' for='customCheck" + rowIdx + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-				 	"</div>");
+					"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIdx + "' >" +
+					"<label class='custom-control-label' for='customCheck" + rowIdx + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+					"</div>");
 			});
-			
-table.draw();
+
+			table.draw();
 
 		});
 		$("#saveComment").click(function () {
@@ -475,8 +485,8 @@ table.draw();
 		$(".save").click(function () {
 
 			table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
-			
-		console.log(data);
+
+				console.log(data);
 				var node = $(this.node());
 
 				if (node.find(".changed").length > 0) {
@@ -485,24 +495,24 @@ table.draw();
 
 					if (colmnIndex == 5) {
 						table.cell(rowIndex, colmnIndex).data(parseFloat(node.text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
- 
+
 					}
-			
+
 				}
-			
+
 				if (node.find(".changed-exp").length > 0) {
 					var row = table.cell(rowIndex, colmnIndex);
- 
- var data = row.data();
+
+					var data = row.data();
 					//$(this.node()).children().removeClass("btn");
 					//table.cell(rowIndex,colmnIndex).data();
 					var exp = $('<div/>').html(data).contents();
-				//	$(this).find("button").removeClass("btn");
-		
-					 //var exp=$(table.cell(rowIndex,colmnIndex).data());
+					//	$(this).find("button").removeClass("btn");
 
-					table.cell(rowIndex,colmnIndex).data("<button class='btn btn-default btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" +exp.attr("data-content") + "'>A</button>");
-            console.log();
+					//var exp=$(table.cell(rowIndex,colmnIndex).data());
+
+					table.cell(rowIndex, colmnIndex).data("<button class='btn btn-default btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + exp.attr("data-content") + "'>A</button>");
+					console.log();
 				}
 				this.invalidate();
 			});
@@ -561,7 +571,7 @@ table.draw();
 		$(document).on('click', function (e) {
 			if ($('.btn-exp').length > 1)
 				$('.btn-exp').popover('hide');
-		//	$(e.target).popover('toggle');
+			//	$(e.target).popover('toggle');
 		});
 		$('#example').on('focusout', '.change', function () {
 			if ($(this).has("input")) {
@@ -633,31 +643,32 @@ table.draw();
 			$("tbody .custom-checkbox input").off('click');
 			$("tbody .custom-checkbox input").unbind('click');
 			$("tbody .custom-checkbox input").click(function () {
-			var row=$(this).closest("tr").index();
-			var cell=$(this).closest("td").index();
-		
-			
+				var row = $(this).closest("tr").index();
+				var cell = $(this).closest("td").index();
+
+
 				$(".delete-row-btns").show();
 				$("#new-column").hide();
+				$('.group-toolbar').hide();
 				$("#new-group").hide();
-                if($(this).prop("checked")){
+				if ($(this).prop("checked")) {
 
-					
+
 					table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-					"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + row + "' >" +
-					"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-					"</div>")
+						"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + row + "' >" +
+						"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+						"</div>")
 
 
-				}else if($(this).prop("checked")==false){
-					
+				} else if ($(this).prop("checked") == false) {
+
 					table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-					"<input type='checkbox'  class='custom-control-input' id='customCheck" + row + "' >" +
-					"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-					"</div>")
+						"<input type='checkbox'  class='custom-control-input' id='customCheck" + row + "' >" +
+						"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+						"</div>")
 
 				}
-			  });
+			});
 			$(document).off('click', ".btn-exp");
 			$(".btn-exp").off('click');
 			$(".btn-exp").unbind('click');
