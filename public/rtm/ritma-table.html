@@ -168,7 +168,7 @@
 
 
 				</div>
-				<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b>1 Adet
+				<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b><span id="adet"></span> Adet
 						Seçildi</b></h5>
 				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows" style="display: none">Seçilenleri
 					Sil</button>
@@ -642,31 +642,50 @@
 			$(document).off('click', "tbody .custom-checkbox input");
 			$("tbody .custom-checkbox input").off('click');
 			$("tbody .custom-checkbox input").unbind('click');
+			var adet=0;
 			$("tbody .custom-checkbox input").click(function () {
+				table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
+					var row = table.cell(rowIndex, colmnIndex);
+
+var data = row.data();
+//$(this.node()).children().removeClass("btn");
+//table.cell(rowIndex,colmnIndex).data();
+if(colmnIndex==1){
+	var exp = $('<div/>').html(data).contents();
+				console.log(exp.find("input").prop("checkbox"));
+}
+
+				});
+		
+			
+			
 				var row = $(this).closest("tr").index();
 				var cell = $(this).closest("td").index();
 
-
+        
 				$(".delete-row-btns").show();
 				$("#new-column").hide();
 				$('.group-toolbar').hide();
 				$("#new-group").hide();
-				if ($(this).prop("checked")) {
+				if ($(this).val()=="on") {
+        	table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+						"<input type='checkbox' checked='checked'  class='custom-control-input' id='customCheck" + row + "' >" +
+						"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+						"</div>");
+						adet++;
+				
+            $("#adet").text(adet)
 
 
+				} else  {
 					table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-						"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + row + "' >" +
+						"<input type='checkbox'   class='custom-control-input' id='customCheck" + row + "' >" +
 						"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 						"</div>")
-
-
-				} else if ($(this).prop("checked") == false) {
-
-					table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-						"<input type='checkbox'  class='custom-control-input' id='customCheck" + row + "' >" +
-						"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-						"</div>")
-
+						adet--;
+					
+				
+            $("#adet").text(adet);
 				}
 			});
 			$(document).off('click', ".btn-exp");
