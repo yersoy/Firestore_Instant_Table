@@ -469,11 +469,11 @@
                         "2": "#14124",
                         "3": "ürün Hizmet",
                         "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
-                        "5": "4235",
+                        "5": "4,235.0",
                         "6": "18%",
                         "7": "dolar",
                         "8": "1",
-                        "9": "600",
+                        "9": "4,400.0 ",
 
                     }).draw();
                 } else {
@@ -486,11 +486,11 @@
                         "2": "#14124",
                         "3": "ürün Hizmet",
                         "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
-                        "5": "4235",
+                        "5": "4,235.0",
                         "6": "18%",
                         "7": "dolar",
                         "8": "1",
-                        "9": "600",
+                        "9": "4,500.0",
 
                     }).draw();
                 }

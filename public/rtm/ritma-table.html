@@ -11,15 +11,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet">
 	<!-- ======================= GLOBAL VENDOR STYLES ========================-->
 	<link rel="stylesheet" href="../assets/css/vendor/bootstrap.css">
-	<link rel="stylesheet" href="../assets/vendor/metismenu/dist/metisMenu.css">
-	<link rel="stylesheet" href="../assets/vendor/switchery-npm/index.css">
-	<link rel="stylesheet" href="../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
-	<!-- ======================= LINE AWESOME ICONS ===========================-->
+	
 	<link rel="stylesheet" href="../assets/css/icons/line-awesome.min.css">
 	<!-- ======================= DRIP ICONS ===================================-->
-	<link rel="stylesheet" href="../assets/css/icons/dripicons.min.css">
-	<!-- ======================= MATERIAL DESIGN ICONIC FONTS =================-->
-	<link rel="stylesheet" href="../assets/css/icons/material-design-iconic-font.min.css">
+
+
 	<!-- ======================= PAGE LEVEL VENDOR STYLES ============================-->
 	<!-- ======================= PAGE LEVEL VENDOR STYLES ========================-->
 	<link rel="stylesheet" href="../assets/vendor/select2/select2.min.css">
@@ -214,8 +210,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6"></div>
-				<div class="col-md-3">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
 					<div class="card">
 						<div class="card-body">
 							<div class="icon-rounded icon-rounded-success float-left m-r-20" style="    width: 70px;
@@ -234,7 +230,7 @@
 
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="card">
 						<div class="card-body">
 							<div class="icon-rounded icon-rounded-info float-left m-r-20" style="    width: 70px;
@@ -377,7 +373,7 @@
 	$(document).ready(function () {
 
 		var table = $("#example").RitmaTable({
-			"scrollX": true, "scrollY": "500px", "rowReorder": true, "search": "#rtmsearch", "addColumn": "#new-column"
+			"scrollX": true, "scrollY": "310px", "rowReorder": true, "search": "#rtmsearch", "addColumn": "#new-column"
 		});
 
 		$("#delete-rows").click(function () {
@@ -479,6 +475,8 @@ table.draw();
 		$(".save").click(function () {
 
 			table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
+			
+		console.log(data);
 				var node = $(this.node());
 
 				if (node.find(".changed").length > 0) {
@@ -487,9 +485,24 @@ table.draw();
 
 					if (colmnIndex == 5) {
 						table.cell(rowIndex, colmnIndex).data(parseFloat(node.text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-
+ 
 					}
+			
+				}
+			
+				if (node.find(".changed-exp").length > 0) {
+					var row = table.cell(rowIndex, colmnIndex);
+ 
+ var data = row.data();
+					//$(this.node()).children().removeClass("btn");
+					//table.cell(rowIndex,colmnIndex).data();
+					var exp = $('<div/>').html(data).contents();
+				//	$(this).find("button").removeClass("btn");
+		
+					 //var exp=$(table.cell(rowIndex,colmnIndex).data());
 
+					table.cell(rowIndex,colmnIndex).data("<button class='btn btn-default btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" +exp.attr("data-content") + "'>A</button>");
+            console.log();
 				}
 				this.invalidate();
 			});
@@ -548,8 +561,7 @@ table.draw();
 		$(document).on('click', function (e) {
 			if ($('.btn-exp').length > 1)
 				$('.btn-exp').popover('hide');
-			$(e.target).popover('toggle');
-
+		//	$(e.target).popover('toggle');
 		});
 		$('#example').on('focusout', '.change', function () {
 			if ($(this).has("input")) {
@@ -560,7 +572,6 @@ table.draw();
 					var cell = $(this).parent();
 					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "</span>").draw();
 				}
-
 			} else if ($(this).has("select")) {
 				if (s == $(this).val()) {
 					var cell = $(this).parent();
@@ -570,7 +581,6 @@ table.draw();
 					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "%</span>").draw();
 				}
 			}
-
 		});
 
 		table.on('row-reorder', function (e, diff, edit) {
@@ -579,11 +589,9 @@ table.draw();
 
 			for (var i = 0, ien = diff.length; i < ien; i++) {
 				var rowData = table.row(diff[i].node).data();
-
 				result += rowData[1] + ' updated to be in position ' +
 					diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
 			}
-
 			$('#result').html('Event result:<br>' + result);
 		});
 
@@ -615,16 +623,11 @@ table.draw();
 				}, 100);
 			});
 			$(".all-check input").click(function () {
-			
-			
-
 				var row = $(this).closest("tr").index();
 				// table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 				// 	"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + row + "' >" +
 				// 	"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 				// 	"</div>")
-
-
 			});
 			$(document).off('click', "tbody .custom-checkbox input");
 			$("tbody .custom-checkbox input").off('click');
@@ -672,7 +675,7 @@ table.draw();
 				sessionStorage.setItem("column", column);
 				$(document).on('click', "#saveExp", function (e) {
 
-					table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw();
+					table.cell(row, column).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw();
 					$('#modalExp').modal('hide');
 				});
 
