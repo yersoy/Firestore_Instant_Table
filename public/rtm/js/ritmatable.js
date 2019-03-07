@@ -293,6 +293,9 @@
                         "targets": [1],
                         "orderable": false,
                         "width": "50px",
+                        'checkboxes': {
+                            'selectRow': true
+                        }
 
                     },
                     {
@@ -468,7 +471,7 @@
 							"</div>",
                         "2": "#14124",
                         "3": "ürün Hizmet",
-                        "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
+                        "4": "<button class='btn btn-secondary btn-outline btn-exp' >A</button>",
                         "5": "4,235.0",
                         "6": "18%",
                         "7": "dolar",
@@ -485,7 +488,7 @@
 							"</div>",
                         "2": "#14124",
                         "3": "ürün Hizmet",
-                        "4": "<button class='btn btn-secondary btn-outline btn-exp' data-toggle='tooltip'   data-original-title='Açıklama' data-content='Şimdi Nasıl Olacak Bilmiyorum Ama Bence Monster Almayalım.'>A</button>",
+                        "4": "<button class='btn btn-secondary btn-outline btn-exp'>A</button>",
                         "5": "4,235.0",
                         "6": "18%",
                         "7": "dolar",

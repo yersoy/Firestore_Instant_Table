@@ -42,6 +42,16 @@
 	<!-- initialize the SDK after all desired features are loaded -->
 	<script defer src="/__/firebase/init.js"></script>
 	<style type="text/css">
+	.odd td{
+    height:0px;
+   transition: all 5s linear;
+    padding:5px;
+}
+.even td{
+    height:0px;
+    transition: all 5s linear;
+    padding:5px;
+}
 		hr.style-eight {
 			overflow: visible;
 			/* For IE */
@@ -380,45 +390,104 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
+		var countChecked = function($table, checkboxClass) {
+  if ($table) {
+    // Find all elements with given class
+    var chkAll = $table.find(checkboxClass);
+    // Count checked checkboxes
+    var checked = chkAll.filter(':checked').length;
+    // Count total
+    var total = chkAll.length;    
+    // Return an object with total and checked values
+    return {
+      total: total,
+      checked: checked
+    }
+  }
+}
+
 
 		var table = $("#example").RitmaTable({
 			"scrollX": true, "scrollY": "310px", "rowReorder": true, "search": "#rtmsearch", "addColumn": "#new-column"
 		});
-
+		function ordering() {
+		
+			table.rows().every(function (id, tableLoop, rowLoop) {
+			table.cell(id, 0).data(id);
+		  table.cell(id, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+			  "<input type='checkbox' class='custom-control-input' id='customCheck" + id + "' >" +
+			  "<label class='custom-control-label' for='customCheck" + id + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+			  "</div>");
+		});
+		table.draw();
+		}
+	
 		$("#delete-rows").click(function () {
+			
 			$(".delete-row-btns").hide();
 			$("#new-column").show();
 			$("#new-group").show();
 			$('.group-toolbar').show();
 			$(".save").show();
+			$('#example tr').each(function(index){
+			var input=	$(this).find('input');
+			var id=(index-1)
+			var linha = $(this).closest('tr');
+            if(input.prop("checked")){
+				linha.fadeOut(400, function () {
 
-			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-				var data = this.data();
-				if (data) {
-					console.log(data)
-					var datastring = data[1];
-					var object = $('<div/>').html(datastring).contents();
+table.row(this).remove();
 
+//$(".save").trigger("click");
 
+});
 
-					if (object.find("input").prop("checked") == true) {
-						table.row(rowIdx).remove().draw();
+			}
+			}).promise()
+    .done( function() {
+       ordering();
+    });
+			
+			table.rows().data($('#example tbody').html()).draw();
+			
+			var result = $("#example tr:eq(1)").find("input").each( function ( index ) {console.log(index)});
+			//table.row(index).remove();
+			  
+			  console.log(result)
+// 			table.rows().eq(0).each( function ( index ) {
 
-					}
-				}
+// } );
+		
+// 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+// 				var row = table.row( rowIdx );
+// 				var index=rowIdx;
+ 
+//  var data = row.data();
+//  console.log(row,data,index);
+//  if (data) {
+			 
+// 			 if(index){
+// 				 var object = $($.parseHTML(data[1])).children("input")[0];
+// 				 var input=  $(object);
+// 				 console.log(input.attr("checked"))
 
+// 				 if (input.attr("checked")=="checked") {
+// 					 table.row(index).remove();
+					 
+// 				 }
+// 			 }
+				 
+// 			 }
+// 			 table.cell(index, 0).data(index);
+// 			 table.cell(index, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+// 				 "<input type='checkbox' class='custom-control-input' id='customCheck" + index + "' >" +
+// 				 "<label class='custom-control-label' for='customCheck" + index + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+// 				 "</div>");
 
-				//... do something with data(), or this.node(), etc
-			});
-			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-				table.cell(rowIdx, 0).data(rowIdx);
-				table.cell(rowIdx, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-					"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIdx + "' >" +
-					"<label class='custom-control-label' for='customCheck" + rowIdx + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-					"</div>");
-			});
+		
+// 			});
 
-			table.draw();
+	
 
 		});
 		$("#saveComment").click(function () {
@@ -478,12 +547,9 @@
 			//firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
 			$(".save").show();
 		})
-		function updateTable(id) {
-			var cel = table.cell(id, 0).data(id).draw();
-			console.log(cel)
-		}
+		
 		$(".save").click(function () {
-
+			ordering();
 			table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
 
 				console.log(data);
@@ -602,7 +668,7 @@
 				result += rowData[1] + ' updated to be in position ' +
 					diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
 			}
-			$('#result').html('Event result:<br>' + result);
+		
 		});
 
 		$(".search-input").keyup(function () {
@@ -610,6 +676,8 @@
 		});
 
 		$('#example').on('draw.dt', function () {
+			
+		
 			$("[data-toggle='tooltip']").popover({
 				html: true,
 				trigger: 'manual',
@@ -643,51 +711,75 @@
 			$("tbody .custom-checkbox input").off('click');
 			$("tbody .custom-checkbox input").unbind('click');
 			var adet=0;
-			$("tbody .custom-checkbox input").click(function () {
-				table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
-					var row = table.cell(rowIndex, colmnIndex);
-
-var data = row.data();
-//$(this.node()).children().removeClass("btn");
-//table.cell(rowIndex,colmnIndex).data();
-if(colmnIndex==1){
-	var exp = $('<div/>').html(data).contents();
-				console.log(exp.find("input").prop("checkbox"));
+			var countChecked = function($table, checkboxClass) {
+  if ($table) {
+    // Find all elements with given class
+    var chkAll = $table.find(checkboxClass);
+    // Count checked checkboxes
+    var checked = chkAll.filter(':checked').length;
+    // Count total
+    var total = chkAll.length;    
+    // Return an object with total and checked values
+    return {
+      total: total,
+      checked: checked
+    }
+  }
 }
 
-				});
+$(document).on('change', '.chk', function() {
+  
+});
+
+$("tbody .custom-checkbox input").click(function(evt){
+           
+
+		
+	var result = countChecked($('#example'), '.custom-control-input');
+		   var rowIndex = ($('#example tr').index($(this).closest('tr'))-1);
+		   var event=evt.target.checked;
+		   console.log(rowIndex)
+		   console.log(event)
+		   console.log(result)
+
+           $("#adet").text(result.checked)
+   
+		   $(".delete-row-btns").show();
+		   $("#new-column").hide();
+		   $('.group-toolbar').hide();
+		   $("#new-group").hide();
+		  
+		   if (event==true) {
 		
 			
+
+	   table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+						"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
+						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+						"</div>").draw();
 			
-				var row = $(this).closest("tr").index();
-				var cell = $(this).closest("td").index();
+		   } else  {
 
-        
-				$(".delete-row-btns").show();
-				$("#new-column").hide();
-				$('.group-toolbar').hide();
-				$("#new-group").hide();
-				if ($(this).val()=="on") {
-        	table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-						"<input type='checkbox' checked='checked'  class='custom-control-input' id='customCheck" + row + "' >" +
-						"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-						"</div>");
-						adet++;
+
+			
+			   
+		 
+			   table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+						"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
+						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+						"</div>").draw();
+						if(result.checked<=0){
+							$(".delete-row-btns").hide();
+		   $("#new-column").show();
+		   $('.group-toolbar').show();
+		   $("#new-group").show();
+		  
+						}
 				
-            $("#adet").text(adet)
-
-
-				} else  {
-					table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-						"<input type='checkbox'   class='custom-control-input' id='customCheck" + row + "' >" +
-						"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-						"</div>")
-						adet--;
-					
-				
-            $("#adet").text(adet);
-				}
-			});
+		   }
+				   
+  
+	   });
 			$(document).off('click', ".btn-exp");
 			$(".btn-exp").off('click');
 			$(".btn-exp").unbind('click');
