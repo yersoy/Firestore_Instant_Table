@@ -63,7 +63,7 @@
 		}
 
 		hr.style-eight:after {
-			content: "Grup Satırı";
+			content: "Sayfa Sonu";
 			display: inline-block;
 			position: relative;
 			top: -0.7em;
@@ -168,10 +168,10 @@
 					<button type="button" class="btn btn-secondary"><i class="la la-barcode"></i> Ürün</button>
 					<button type="button" class="btn btn-secondary" id="new-column"> <i class="la la-indent"></i> Yeni
 						Satır</button>
-					<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-bold"></i> Başlık Ekle</button>
+					<button type="button" class="btn btn-secondary" ><i class="la la-bold"></i> Başlık Ekle</button>
 					<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara Toplam</button>
 					<button type="button" class="btn btn-secondary"><i class="la la-comment"></i> Yorum Ekle</button>
-					<button type="button" class="btn btn-secondary"><i class="la la-file-text"></i> Sayfa Sonu </button>
+					<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i> Sayfa Sonu </button>
 					<button type="button" class="btn btn-secondary"><i class="la la-plus"></i> Boş Satır</button>
 
 
@@ -506,6 +506,7 @@ table.row(this).remove();
 			$(".yorum-alert").show();
 		}
 		firebase.database().ref('yorum').on('value', snap => {
+
 			$(".yorumlar").html(" ");
 			for (var index in snap.val()) {
 				console.log(snap.val()[index]);
@@ -659,21 +660,16 @@ table.row(this).remove();
 			}
 		});
 
-		table.on('row-reorder', function (e, diff, edit) {
+		table.on('row-reorder.dt', function (e, diff, edit) {
 			$(".save").show();
-			var result = 'Reorder started on row: ' + edit.triggerRow.data()[1] + '<br>';
-
-			for (var i = 0, ien = diff.length; i < ien; i++) {
-				var rowData = table.row(diff[i].node).data();
-				result += rowData[1] + ' updated to be in position ' +
-					//diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
-					table.cell(diff[i].oldData, 0).data(diff[i].newData);
-		  table.cell(diff[i].oldData, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-			  "<input type='checkbox' class='custom-control-input' id='customCheck" + diff[i].newData + "' >" +
-			  "<label class='custom-control-label' for='customCheck" + diff[i].newData + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+			table.rows().every(function (id, tableLoop, rowLoop) {
+			table.cell(id, 0).data(id);
+		  table.cell(id, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+			  "<input type='checkbox' class='custom-control-input' id='customCheck" + id + "' >" +
+			  "<label class='custom-control-label' for='customCheck" + id + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 			  "</div>");
-			}
-		
+		});
+		table.draw();
 		});
 
 		$(".search-input").keyup(function () {
@@ -712,6 +708,8 @@ table.row(this).remove();
 				// 	"<label class='custom-control-label' for='customCheck" + row + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 				// 	"</div>")
 			});
+			$(document).off('click', "#example tbody   td");
+
 			$(document).off('click', "tbody .custom-checkbox input");
 			$("tbody .custom-checkbox input").off('click');
 			$("tbody .custom-checkbox input").unbind('click');
@@ -850,12 +848,12 @@ $("tbody .custom-checkbox input").click(function(evt){
 
 			})
 			$('#example tbody   td:nth-child(5)').click(function () {
+				var text = $(this).text().replace(/,/g, '');
 
 				if ($(this).has("input").length) {
 					console.log("input zaten var.")
 				}
 				else {
-					var text = $(this).text();
 					$(this).html("<input type='number' class='form-control form-control-sm change b-info' value='" + text + "' />");
 					$(".save").show();
 					$(this).find("input").trigger("focus")
