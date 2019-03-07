@@ -549,7 +549,7 @@ table.row(this).remove();
 		})
 		
 		$(".save").click(function () {
-			ordering();
+			
 			table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
 
 				console.log(data);
@@ -666,7 +666,12 @@ table.row(this).remove();
 			for (var i = 0, ien = diff.length; i < ien; i++) {
 				var rowData = table.row(diff[i].node).data();
 				result += rowData[1] + ' updated to be in position ' +
-					diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
+					//diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
+					table.cell(diff[i].oldData, 0).data(diff[i].newData);
+		  table.cell(diff[i].oldData, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+			  "<input type='checkbox' class='custom-control-input' id='customCheck" + diff[i].newData + "' >" +
+			  "<label class='custom-control-label' for='customCheck" + diff[i].newData + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+			  "</div>");
 			}
 		
 		});
