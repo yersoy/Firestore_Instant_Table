@@ -251,9 +251,7 @@
             "scrollY": "200px",
             "scrollCollapse": true,
             "paging": false,
-            "rowReorder": {
-                update: true
-            },
+            "rowReorder": true,
             "addColumn": false
 
         }, options);
