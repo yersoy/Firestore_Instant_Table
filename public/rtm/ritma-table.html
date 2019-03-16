@@ -14,8 +14,6 @@
 
 	<link rel="stylesheet" href="../assets/css/icons/line-awesome.min.css">
 	<!-- ======================= DRIP ICONS ===================================-->
-
-
 	<!-- ======================= PAGE LEVEL VENDOR STYLES ============================-->
 	<!-- ======================= PAGE LEVEL VENDOR STYLES ========================-->
 	<link rel="stylesheet" href="../assets/vendor/select2/select2.min.css">
@@ -42,16 +40,41 @@
 	<!-- initialize the SDK after all desired features are loaded -->
 	<script defer src="/__/firebase/init.js"></script>
 	<style type="text/css">
-	.odd td{
-    height:0px;
-   transition: all 5s linear;
-    padding:5px;
-}
-.even td{
-    height:0px;
-    transition: all 5s linear;
-    padding:5px;
-}
+		/* width */
+		::-webkit-scrollbar {
+			width: 4px;
+		}
+
+		/* Track */
+		::-webkit-scrollbar-track {
+			box-shadow: inset 0 0 1px grey;
+			border-radius: 1px;
+		}
+
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+			background: #b0d7fa;
+			;
+			border-radius: 1px;
+		}
+
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+			background: #b0d7fa;
+		}
+
+		.odd td {
+			height: 0px;
+			transition: all 5s linear;
+			padding: 5px;
+		}
+
+		.even td {
+			height: 0px;
+			transition: all 5s linear;
+			padding: 5px;
+		}
+
 		hr.style-eight {
 			overflow: visible;
 			/* For IE */
@@ -168,17 +191,19 @@
 					<button type="button" class="btn btn-secondary"><i class="la la-barcode"></i> Ürün</button>
 					<button type="button" class="btn btn-secondary" id="new-column"> <i class="la la-indent"></i> Yeni
 						Satır</button>
-					<button type="button" class="btn btn-secondary" ><i class="la la-bold"></i> Başlık Ekle</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-bold"></i> Başlık Ekle</button>
 					<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara Toplam</button>
 					<button type="button" class="btn btn-secondary"><i class="la la-comment"></i> Yorum Ekle</button>
-					<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i> Sayfa Sonu </button>
+					<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i> Sayfa Sonu
+					</button>
 					<button type="button" class="btn btn-secondary"><i class="la la-plus"></i> Boş Satır</button>
 
 
 
 
 				</div>
-				<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b><span id="adet"></span> Adet
+				<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b><span
+							id="adet"></span> Adet
 						Seçildi</b></h5>
 				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows" style="display: none">Seçilenleri
 					Sil</button>
@@ -317,7 +342,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="exampleFormControlTextarea">Açıklama Giriniz</label>
+
 						<textarea class="form-control" id="exampleFormControlTextarea" rows="3"></textarea>
 					</div>
 				</div>
@@ -390,104 +415,104 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		var countChecked = function($table, checkboxClass) {
-  if ($table) {
-    // Find all elements with given class
-    var chkAll = $table.find(checkboxClass);
-    // Count checked checkboxes
-    var checked = chkAll.filter(':checked').length;
-    // Count total
-    var total = chkAll.length;    
-    // Return an object with total and checked values
-    return {
-      total: total,
-      checked: checked
-    }
-  }
-}
+		var countChecked = function ($table, checkboxClass) {
+			if ($table) {
+				// Find all elements with given class
+				var chkAll = $table.find(checkboxClass);
+				// Count checked checkboxes
+				var checked = chkAll.filter(':checked').length;
+				// Count total
+				var total = chkAll.length;
+				// Return an object with total and checked values
+				return {
+					total: total,
+					checked: checked
+				}
+			}
+		}
 
 
 		var table = $("#example").RitmaTable({
 			"scrollX": true, "scrollY": "310px", "rowReorder": true, "search": "#rtmsearch", "addColumn": "#new-column"
 		});
 		function ordering() {
-		
+
 			table.rows().every(function (id, tableLoop, rowLoop) {
-			table.cell(id, 0).data(id);
-		  table.cell(id, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-			  "<input type='checkbox' class='custom-control-input' id='customCheck" + id + "' >" +
-			  "<label class='custom-control-label' for='customCheck" + id + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-			  "</div>");
-		});
-		table.draw();
+				table.cell(id, 0).data(id);
+				table.cell(id, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+					"<input type='checkbox' class='custom-control-input' id='customCheck" + id + "' >" +
+					"<label class='custom-control-label' for='customCheck" + id + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+					"</div>");
+			});
+			table.draw();
 		}
-	
+
 		$("#delete-rows").click(function () {
-			
+
 			$(".delete-row-btns").hide();
 			$("#new-column").show();
 			$("#new-group").show();
 			$('.group-toolbar').show();
 			$(".save").show();
-			$('#example tr').each(function(index){
-			var input=	$(this).find('input');
-			var id=(index-1)
-			var linha = $(this).closest('tr');
-            if(input.prop("checked")){
-				linha.fadeOut(400, function () {
+			$('#example tr').each(function (index) {
+				var input = $(this).find('input');
+				var id = (index - 1)
+				var linha = $(this).closest('tr');
+				if (input.prop("checked")) {
+					linha.fadeOut(400, function () {
 
-table.row(this).remove();
+						table.row(this).remove();
 
-//$(".save").trigger("click");
+						//$(".save").trigger("click");
 
-});
+					});
 
-			}
+				}
 			}).promise()
-    .done( function() {
-       ordering();
-    });
-			
+				.done(function () {
+					ordering();
+				});
+
 			table.rows().data($('#example tbody').html()).draw();
-			
-			var result = $("#example tr:eq(1)").find("input").each( function ( index ) {console.log(index)});
+
+			var result = $("#example tr:eq(1)").find("input").each(function (index) { console.log(index) });
 			//table.row(index).remove();
-			  
-			  console.log(result)
-// 			table.rows().eq(0).each( function ( index ) {
 
-// } );
-		
-// 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-// 				var row = table.row( rowIdx );
-// 				var index=rowIdx;
- 
-//  var data = row.data();
-//  console.log(row,data,index);
-//  if (data) {
-			 
-// 			 if(index){
-// 				 var object = $($.parseHTML(data[1])).children("input")[0];
-// 				 var input=  $(object);
-// 				 console.log(input.attr("checked"))
+			console.log(result)
+			// 			table.rows().eq(0).each( function ( index ) {
 
-// 				 if (input.attr("checked")=="checked") {
-// 					 table.row(index).remove();
-					 
-// 				 }
-// 			 }
-				 
-// 			 }
-// 			 table.cell(index, 0).data(index);
-// 			 table.cell(index, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-// 				 "<input type='checkbox' class='custom-control-input' id='customCheck" + index + "' >" +
-// 				 "<label class='custom-control-label' for='customCheck" + index + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-// 				 "</div>");
+			// } );
 
-		
-// 			});
+			// 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+			// 				var row = table.row( rowIdx );
+			// 				var index=rowIdx;
 
-	
+			//  var data = row.data();
+			//  console.log(row,data,index);
+			//  if (data) {
+
+			// 			 if(index){
+			// 				 var object = $($.parseHTML(data[1])).children("input")[0];
+			// 				 var input=  $(object);
+			// 				 console.log(input.attr("checked"))
+
+			// 				 if (input.attr("checked")=="checked") {
+			// 					 table.row(index).remove();
+
+			// 				 }
+			// 			 }
+
+			// 			 }
+			// 			 table.cell(index, 0).data(index);
+			// 			 table.cell(index, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+			// 				 "<input type='checkbox' class='custom-control-input' id='customCheck" + index + "' >" +
+			// 				 "<label class='custom-control-label' for='customCheck" + index + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+			// 				 "</div>");
+
+
+			// 			});
+
+
 
 		});
 		$("#saveComment").click(function () {
@@ -540,7 +565,10 @@ table.row(this).remove();
 
 
 
-			var newRow = "<tr> <td>" + data.length + "</td> <td><i class='la la-arrows-v '></i><i class='la la-times '></i></td> <td colspan='8'><hr class='style-eight'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td></tr>";
+			var newRow = "<tr> <td>" + data.length + "</td> <td><div class='custom-control custom-checkbox form-check'>" +
+				"<input type='checkbox' class='custom-control-input' id='customCheck" + data.length + "' >" +
+				"<label class='custom-control-label' for='customCheck" + data.length + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+				"</div></td> <td colspan='8'><hr class='style-eight' style='display:block'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td></tr>";
 
 			table.row.add($(newRow)).draw();
 
@@ -548,9 +576,9 @@ table.row(this).remove();
 			//firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
 			$(".save").show();
 		})
-		
+
 		$(".save").click(function () {
-			
+
 			table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
 
 				console.log(data);
@@ -606,18 +634,33 @@ table.row(this).remove();
 			console.log(snap.val());
 
 			for (var index in snap.val()) {
-				table.row.add([
-					snap.val()[index][0],
-					snap.val()[index][1],
-					snap.val()[index][2],
-					snap.val()[index][3],
-					snap.val()[index][4],
-					snap.val()[index][5],
-					snap.val()[index][6],
-					snap.val()[index][7],
-					snap.val()[index][8],
-					snap.val()[index][9],
-				]).draw();
+				if (snap.val()[index][3] == "" && snap.val()[index][4] == "" && snap.val()[index][5] == "" && snap.val()[index][6] == "" && snap.val()[index][7] == "" && snap.val()[index][8] == "" && snap.val()[index][9] == "") {
+					var newRow = "<tr> <td>" + snap.val()[index][0] + "</td> <td>" + snap.val()[index][1] + "</td> <td colspan='8'>" + snap.val()[index][2] + "</td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td></tr>";
+
+					table.row.add($(newRow)).draw();
+				}
+				else {
+					table.row.add([
+						snap.val()[index][0],
+						snap.val()[index][1],
+						snap.val()[index][2],
+						snap.val()[index][3],
+						snap.val()[index][4],
+						snap.val()[index][5],
+						snap.val()[index][6],
+						snap.val()[index][7],
+						snap.val()[index][8],
+						snap.val()[index][9],
+					]).draw();
+					$("#example tr:last").hide(333, function () {
+						$(this).fadeIn("slow");
+						$(this).find("hr").show(333, function () {
+							$(this).fadeIn("slow");
+						});
+
+					});
+				}
+
 
 			}
 
@@ -640,7 +683,7 @@ table.row(this).remove();
 				$('.btn-exp').popover('hide');
 			//	$(e.target).popover('toggle');
 		});
-		$('#example').on('focusout', '.change', function () {
+		$('#example').on('blur', '.change', function () {
 			if ($(this).has("input")) {
 				if (s == $(this).val()) {
 					var cell = $(this).parent();
@@ -658,18 +701,19 @@ table.row(this).remove();
 					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "%</span>").draw();
 				}
 			}
+
 		});
 
 		table.on('row-reorder.dt', function (e, diff, edit) {
 			$(".save").show();
 			table.rows().every(function (id, tableLoop, rowLoop) {
-			table.cell(id, 0).data(id);
-		  table.cell(id, 1).data("<div class='custom-control custom-checkbox form-check'>" +
-			  "<input type='checkbox' class='custom-control-input' id='customCheck" + id + "' >" +
-			  "<label class='custom-control-label' for='customCheck" + id + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-			  "</div>");
-		});
-		table.draw();
+				table.cell(id, 0).data(id);
+				table.cell(id, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+					"<input type='checkbox' class='custom-control-input' id='customCheck" + id + "' >" +
+					"<label class='custom-control-label' for='customCheck" + id + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
+					"</div>");
+			});
+			table.draw();
 		});
 
 		$(".search-input").keyup(function () {
@@ -677,8 +721,8 @@ table.row(this).remove();
 		});
 
 		$('#example').on('draw.dt', function () {
-			
-		
+
+
 			$("[data-toggle='tooltip']").popover({
 				html: true,
 				trigger: 'manual',
@@ -709,80 +753,81 @@ table.row(this).remove();
 				// 	"</div>")
 			});
 			$(document).off('click', "#example tbody   td");
+			$("#example tbody   td").unbind('click');
 
 			$(document).off('click', "tbody .custom-checkbox input");
 			$("tbody .custom-checkbox input").off('click');
 			$("tbody .custom-checkbox input").unbind('click');
-			var adet=0;
-			var countChecked = function($table, checkboxClass) {
-  if ($table) {
-    // Find all elements with given class
-    var chkAll = $table.find(checkboxClass);
-    // Count checked checkboxes
-    var checked = chkAll.filter(':checked').length;
-    // Count total
-    var total = chkAll.length;    
-    // Return an object with total and checked values
-    return {
-      total: total,
-      checked: checked
-    }
-  }
-}
+			var adet = 0;
+			var countChecked = function ($table, checkboxClass) {
+				if ($table) {
+					// Find all elements with given class
+					var chkAll = $table.find(checkboxClass);
+					// Count checked checkboxes
+					var checked = chkAll.filter(':checked').length;
+					// Count total
+					var total = chkAll.length;
+					// Return an object with total and checked values
+					return {
+						total: total,
+						checked: checked
+					}
+				}
+			}
 
-$(document).on('change', '.chk', function() {
-  
-});
+			$(document).on('change', '.chk', function () {
 
-$("tbody .custom-checkbox input").click(function(evt){
-           
+			});
 
-		
-	var result = countChecked($('#example'), '.custom-control-input');
-		   var rowIndex = ($('#example tr').index($(this).closest('tr'))-1);
-		   var event=evt.target.checked;
-		   console.log(rowIndex)
-		   console.log(event)
-		   console.log(result)
+			$("tbody .custom-checkbox input").click(function (evt) {
 
-           $("#adet").text(result.checked)
-   
-		   $(".delete-row-btns").show();
-		   $("#new-column").hide();
-		   $('.group-toolbar').hide();
-		   $("#new-group").hide();
-		  
-		   if (event==true) {
-		
-			
 
-	   table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+
+				var result = countChecked($('#example'), '.custom-control-input');
+				var rowIndex = ($('#example tr').index($(this).closest('tr')) - 1);
+				var event = evt.target.checked;
+				console.log(rowIndex)
+				console.log(event)
+				console.log(result)
+
+				$("#adet").text(result.checked)
+
+				$(".delete-row-btns").show();
+				$("#new-column").hide();
+				$('.group-toolbar').hide();
+				$("#new-group").hide();
+
+				if (event == true) {
+
+
+
+					table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 						"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
 						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 						"</div>").draw();
-			
-		   } else  {
+
+				} else {
 
 
-			
-			   
-		 
-			   table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
+
+
+
+					table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 						"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
 						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 						"</div>").draw();
-						if(result.checked<=0){
-							$(".delete-row-btns").hide();
-		   $("#new-column").show();
-		   $('.group-toolbar').show();
-		   $("#new-group").show();
-		  
-						}
-				
-		   }
-				   
-  
-	   });
+					if (result.checked <= 0) {
+						$(".delete-row-btns").hide();
+						$("#new-column").show();
+						$('.group-toolbar').show();
+						$("#new-group").show();
+
+					}
+
+				}
+
+
+			});
 			$(document).off('click', ".btn-exp");
 			$(".btn-exp").off('click');
 			$(".btn-exp").unbind('click');
@@ -796,6 +841,7 @@ $("tbody .custom-checkbox input").click(function(evt){
 
 				var row = $(this).closest("tr");
 				var column = $(this).parent("td");
+				$("#exampleFormControlTextarea").val($(this).attr("data-content"));
 				sessionStorage.setItem("row", row);
 				sessionStorage.setItem("column", column);
 				$(document).on('click', "#saveExp", function (e) {
@@ -806,7 +852,6 @@ $("tbody .custom-checkbox input").click(function(evt){
 
 				//$("#exampleFormControlTextarea1").text( );
 				//	 alert(row.find("td:eq(3)").attr("data-content"))
-
 				//table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + person + "'>A</button>").draw()
 
 			});
@@ -823,15 +868,20 @@ $("tbody .custom-checkbox input").click(function(evt){
 
 			})
 			$('#example tbody  td:nth-child(2)').click(function () {
-				if ($(this).has("input").length) {
-					console.log("input zaten var.")
+				if ($(this).has("hr").length) {
+					//	alert("hr")
+				} else {
+					if ($(this).has("input").length) {
+						console.log("input zaten var.")
+					}
+					else {
+						var text = $(this).text();
+						$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
+						$(".save").show();
+						$(this).find("input").trigger("focus")
+					}
 				}
-				else {
-					var text = $(this).text();
-					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
-					$(".save").show();
-					$(this).find("input").trigger("focus")
-				}
+
 			})
 			$('#example tbody   td:nth-child(3)').click(function () {
 
@@ -845,6 +895,9 @@ $("tbody .custom-checkbox input").click(function(evt){
 					$(this).find("input").trigger("focus")
 
 				}
+
+
+
 
 			})
 			$('#example tbody   td:nth-child(5)').click(function () {

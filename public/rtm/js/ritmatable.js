@@ -486,14 +486,14 @@
 								"<input type='checkbox' class='custom-control-input' id='customCheck"+data.length +"' >"+
 								"<label class='custom-control-label' for='customCheck"+data.length +"'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
 							"</div>",
-                        "2": "#14124",
-                        "3": "ürün Hizmet",
+                        "2": "<span class='text-info'>#0000</span>",
+                        "3": "<span class='text-info'>Ürün & Hizmet Giriniz</span>",
                         "4": "<button class='btn btn-secondary btn-outline btn-exp'>A</button>",
-                        "5": "4,235.0",
-                        "6": "18%",
+                        "5": "<span class='text-info'>0</span>",
+                        "6": "<span class='text-info'>18%</span>",
                         "7": "dolar",
-                        "8": "1",
-                        "9": "4,500.0",
+                        "8": "<span class='text-info'>1</span>",
+                        "9": "<span class='text-info'>0</span>",
 
                     }).draw();
                 }
