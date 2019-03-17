@@ -40,16 +40,18 @@
 	<!-- initialize the SDK after all desired features are loaded -->
 	<script defer src="/__/firebase/init.js"></script>
 	<style type="text/css">
-	.btn-secondary:hover i{
-   color:white;
-	}
-	.btn-xs-sec{
-		height: 22px!important;
-    padding-top: 0!important;
-    padding-bottom: 0!important;
-    padding-right: 2px!important;
-    padding-left: 10px!important;
-	}
+		.btn-secondary:hover i {
+			color: white;
+		}
+
+		.btn-xs-sec {
+			height: 22px !important;
+			padding-top: 0 !important;
+			padding-bottom: 0 !important;
+			padding-right: 2px !important;
+			padding-left: 10px !important;
+		}
+
 		/* width */
 		::-webkit-scrollbar {
 			width: 4px;
@@ -364,8 +366,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade " id="modalproduct" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
+	<div class="modal fade modal-xl" id="modalproduct" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog " role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel9">Ürün Seçim</h5>
@@ -374,6 +376,10 @@
 					</button>
 				</div>
 				<div class="modal-body p-0">
+					<div class="search-wrapper page-search m-t-10 p-r-10 p-l-10">
+						<button class="search-button-submit" type="submit"><i class="la la-search"></i></button>
+						<input type="text" class="search-input" placeholder="Kodu,Ürün Adı, Alış Satış Fiyatı">
+					</div>
 					<div class="table-responsive">
 						<table class="table table-condensed">
 							<thead>
@@ -385,48 +391,22 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="productsSelect">
 								<tr>
 									<td>#36367</td>
 									<td>Dell N5010 15.1" 1TB SSD Laptop</td>
-									<td> <h6 class="text-info">5,000 <i class="la la-try text-info"></i></h6></td>
-									<td> <h6 class="text-success">5,500 <i class="la la-try text-success"></i></h6></td>
+									<td>
+										<h6 class="text-info">5,000 <i class="la la-try text-info"></i></h6>
+									</td>
+									<td>
+										<h6 class="text-success">5,500 <i class="la la-try text-success"></i></h6>
+									</td>
 									<td>
 										<button class="btn btn-secondary btn-rounded btn-xs-sec">Seç <i class="la la-plus "></i>
 										</button>
 									</td>
 								</tr>
-								<tr>
-									<td>#36367</td>
-									<td>Dell N5010 15.1" 1TB SSD Laptop</td>
-									<td> <h6 class="text-info">5,000 <i class="la la-try text-info"></i></h6></td>
-									<td> <h6 class="text-success">5,500 <i class="la la-try text-success"></i></h6></td>
-						
-									<td>
-											<button class="btn btn-secondary btn-rounded btn-xs-sec">Seç <i class="la la-plus "></i>
-											</button>
-									</td>
-								</tr>
-								<tr>
-									<td>#36367</td>
-									<td>Dell N5010 15.1" 1TB SSD Laptop</td>
-									<td> <h6 class="text-info">5,000 <i class="la la-try text-info"></i></h6></td>
-									<td> <h6 class="text-success">5,500 <i class="la la-try text-success"></i></h6></td>
-									<td>
-											<button class="btn btn-secondary btn-rounded btn-xs-sec">Seç <i class="la la-plus "></i>
-											</button>
-									</td>
-								</tr>
-								<tr>
-									<td>#36367</td>
-									<td>Dell N5010 15.1" 1TB SSD Laptop</td>
-									<td> <h6 class="text-info">5,000 <i class="la la-try text-info"></i></h6></td>
-									<td> <h6 class="text-success">5,500 <i class="la la-try text-success"></i></h6></td>
-									<td>
-											<button class="btn btn-secondary btn-rounded btn-xs-sec">Seç <i class="la la-plus "></i>
-											</button>
-									</td>
-								</tr>
+
 							</tbody>
 						</table>
 					</div>
@@ -523,11 +503,11 @@
 
 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
 
-				table.cell(rowIdx, 0).data(rowIdx).draw();
+				table.cell(rowIdx, 0).data(rowIdx).draw(false);
 				table.cell(rowIdx, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 					"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIdx + "' >" +
 					"<label class='custom-control-label' for='customCheck" + rowIdx + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-					"</div>").draw();
+					"</div>").draw(false);
 			});
 
 		}
@@ -543,14 +523,17 @@
 					"<input type='checkbox' class='custom-control-input' id='customCheck" + diff[i].newData + "' >" +
 					"<label class='custom-control-label' for='customCheck" + diff[i].newData + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 					"</div>");
-				result += rowData[1] + ' updated to be in position ' +
-					diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
+				// result += rowData[1] + ' updated to be in position ' +
+				// 	diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
 			}
-			table.draw();
+			table.draw(false);
 			console.log('Event result:<br>' + result);
 		});
 
-
+		table.on('row-reordered.dt', function (e, diff, edit) {
+			var data =$("#example tbody").html();
+		table.rows().data(data).draw();
+		});
 		$("#delete-rows").click(function () {
 
 			$(".delete-row-btns").hide();
@@ -577,7 +560,7 @@
 					ordering();
 				});
 
-			table.rows().data($('#example tbody').html()).draw();
+			table.rows().data($('#example tbody').html()).draw(false);
 
 			var result = $("#example tr:eq(1)").find("input").each(function (index) { console.log(index) });
 			//table.row(index).remove();
@@ -661,6 +644,27 @@
 
 
 		});
+		firebase.database().ref('products').once('value').then(function (snap) {
+
+			$("#productsSelect").html(" ");
+			for (var index in snap.val()) {
+				console.log(snap.val()[index]);
+				$("#productsSelect").prepend("	<tr>" +
+					"<td>" + snap.val()[index][0] + "</td>" +
+					"<td>" + snap.val()[index][1] + "</td>" +
+					"<td> <h6 class='text-info'>" + snap.val()[index][2] + " <i class='la la-try text-info'></i></h6></td>" +
+					"<td> <h6 class='text-success'>" + snap.val()[index][3] + "<i class='la la-try text-success'></i></h6></td>" +
+					"<td>" +
+					"	<button class='btn btn-secondary btn-rounded btn-xs-sec'>Seç <i class='la la-plus '></i>" +
+					"</button>" +
+					"</td>" +
+					"</tr>");
+
+			}
+
+
+
+		});
 
 		$("#new-group").click(function () {
 			var data = table
@@ -674,7 +678,7 @@
 				"<label class='custom-control-label' for='customCheck" + data.length + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 				"</div></td> <td colspan='8'><hr class='style-eight' style='display:block'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td></tr>";
 
-			table.row.add($(newRow)).draw();
+			table.row.add($(newRow)).draw(false);
 
 
 			//firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
@@ -716,10 +720,10 @@
 				this.invalidate();
 			});
 
-			table.draw();
+			table.draw(false);
 			var tableData = table.rows().data();
 			var serverdata = [];
-			console.log(table.data());
+
 			//firebase.database().ref("body").set()
 			//notifyMe("Ritma Table Verileri Başarı İle Kaydedildi..");
 			for (var i = 0; i <= tableData.length - 1; i++) {
@@ -734,14 +738,14 @@
 			;
 			table
 				.clear()
-				.draw();
+				.draw(false);
 			console.log(snap.val());
 
 			for (var index in snap.val()) {
 				if (snap.val()[index][3] == "" && snap.val()[index][4] == "" && snap.val()[index][5] == "" && snap.val()[index][6] == "" && snap.val()[index][7] == "" && snap.val()[index][8] == "" && snap.val()[index][9] == "") {
 					var newRow = "<tr> <td>" + snap.val()[index][0] + "</td> <td>" + snap.val()[index][1] + "</td> <td colspan='8'>" + snap.val()[index][2] + "</td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td></tr>";
 
-					table.row.add($(newRow)).draw();
+					table.row.add($(newRow)).draw(false);
 				}
 				else {
 					table.row.add([
@@ -755,7 +759,7 @@
 						snap.val()[index][7],
 						snap.val()[index][8],
 						snap.val()[index][9],
-					]).draw();
+					]).draw(false);
 					$("#example tr:last").hide(333, function () {
 						$(this).fadeIn("slow");
 						$(this).find("hr").show(333, function () {
@@ -791,18 +795,18 @@
 			if ($(this).has("input")) {
 				if (s == $(this).val()) {
 					var cell = $(this).parent();
-					table.cell(cell).data($(this).val()).draw();
+					table.cell(cell).data($(this).val()).draw(false);
 				} else {
 					var cell = $(this).parent();
-					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "</span>").draw();
+					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "</span>").draw(false);
 				}
 			} else if ($(this).has("select")) {
 				if (s == $(this).val()) {
 					var cell = $(this).parent();
-					table.cell(cell).data($(this).val() + "%").draw();
+					table.cell(cell).data($(this).val() + "%").draw(false);
 				} else {
 					var cell = $(this).parent();
-					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "%</span>").draw();
+					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "%</span>").draw(false);
 				}
 			}
 
@@ -811,7 +815,7 @@
 
 
 		$(".search-input").keyup(function () {
-			table.search($(this).val()).draw();
+			table.search($(this).val()).draw(false);
 		});
 
 		$('#example').on('draw.dt', function () {
@@ -898,7 +902,7 @@
 					table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 						"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
 						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-						"</div>").draw();
+						"</div>").draw(false);
 
 				} else {
 
@@ -909,7 +913,7 @@
 					table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 						"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
 						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
-						"</div>").draw();
+						"</div>").draw(false);
 					if (result.checked <= 0) {
 						$(".delete-row-btns").hide();
 						$("#new-column").show();
@@ -931,19 +935,24 @@
 
 				$(".save").show();
 				$("#modalExp").modal();
-				e.preventDefault();
+				// e.preventDefault();
 
-				var row = $(this).closest("tr");
-				var column = $(this).parent("td");
+				//var row =  $("#example tbody tr").index( $(this).closest("tr"));
+				var row =  $(this).closest("td");
+			
+				var column = 4;
+				sessionStorage.setItem("row",row);
+				
+	
+	
 				$("#exampleFormControlTextarea").val($(this).attr("data-content"));
-				sessionStorage.setItem("row", row);
-				sessionStorage.setItem("column", column);
-				$(document).on('click', "#saveExp", function (e) {
-
-					table.cell(row, column).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw();
+			
+			$("#saveExp").click(function(){
+		
+					table.cell(row).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw(false);
 					$('#modalExp').modal('hide');
 				});
-
+         
 				//$("#exampleFormControlTextarea1").text( );
 				//	 alert(row.find("td:eq(3)").attr("data-content"))
 				//table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + person + "'>A</button>").draw()

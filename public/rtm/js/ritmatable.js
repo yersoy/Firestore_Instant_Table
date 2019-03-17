@@ -476,7 +476,7 @@
                         "8": "1",
                         "9": "4,400.0 ",
 
-                    }).draw();
+                    }).draw(false);
                 } else {
                     table.row.add({
                         "0": data.length ,
@@ -493,7 +493,7 @@
                         "8": "<span class='text-info'>1</span>",
                         "9": "<span class='text-info'>0</span>",
 
-                    }).draw();
+                    }).draw(false);
                 }
 
                 //firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
