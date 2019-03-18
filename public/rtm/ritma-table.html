@@ -28,7 +28,8 @@
 	<link rel="stylesheet" href="../assets/css/layouts/vertical/themes/theme-a.css">
 	<link rel="stylesheet" type="text/css"
 		href="https://cdn.datatables.net/rowreorder/1.2.4/css/rowReorder.bootstrap4.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 
 	<!-- update the version number as needed -->
 	<script defer src="/__/firebase/5.8.3/firebase-app.js"></script>
@@ -192,7 +193,8 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn-outline" data-dismiss="modal">İptal</button>
+							<button type="button" class="btn btn-secondary btn-outline"
+								data-dismiss="modal">İptal</button>
 							<button type="button" class="btn btn-primary" id="saveComment">Yorum Ekle</button>
 						</div>
 					</div>
@@ -200,14 +202,16 @@
 			</div>
 			<div class="p-t-0 p-l-0 p-r-0">
 				<div class="btn-group group-toolbar" role="group" aria-label="Basic example">
-					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalproduct"><i
-							class="la la-barcode"></i> Ürün</button>
+					<button type="button" class="btn btn-secondary" id="product-btn" data-toggle="modal"
+						data-target="#modalproduct"><i class="la la-barcode"></i> Ürün</button>
 					<button type="button" class="btn btn-secondary" id="new-column"> <i class="la la-indent"></i> Yeni
 						Satır</button>
 					<button type="button" class="btn btn-secondary"><i class="la la-bold"></i> Başlık Ekle</button>
-					<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara Toplam</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara
+						Toplam</button>
 					<button type="button" class="btn btn-secondary"><i class="la la-comment"></i> Yorum Ekle</button>
-					<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i> Sayfa Sonu
+					<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i> Sayfa
+						Sonu
 					</button>
 					<button type="button" class="btn btn-secondary"><i class="la la-plus"></i> Boş Satır</button>
 
@@ -218,8 +222,11 @@
 				<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b><span
 							id="adet"></span> Adet
 						Seçildi</b></h5>
-				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows" style="display: none">Seçilenleri
+				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
+					style="display: none">Seçilenleri
 					Sil</button>
+				<button class="btn btn-outline btn-danger delete-row-btns" id="cancel-rows"
+					style="display: none">İptal</button>
 				<button class="btn btn-info  save" style="display: none">Kaydet</button>
 
 
@@ -233,9 +240,26 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="p-15  col-12" id="loading">
+					<div class="card">
+						<div class="card-body " style="    display: flex;
+								align-items: center;flex-direction: column;">
+							<div class="preloader pl-lg pls-primary">
+								<svg class="pl-circular" viewBox="25 25 50 50">
+									<circle class="plc-path" cx="50" cy="50" r="20" />
+								</svg>
+							</div>
+							<h3 class="m-t-20">
+								<bold>Lütfen Bekleyiniz</bold>
+							</h3>
+						</div>
 
 
-				<div class="col-12">
+					</div>
+				</div>
+
+
+				<div class="col-12 m-t-10" id="table-card" style="display:none">
 					<div class="card">
 						<div class="card-body p-0">
 
@@ -245,8 +269,9 @@
 									<tr>
 										<th>seq</th>
 										<th width="10px" style="width: 100px ">
-											<div class="custom-control custom-checkbox form-check all-check" style="    height: 27px;"><input
-													type="checkbox" class="custom-control-input" id="customCheck-1"><label
+											<div class="custom-control custom-checkbox form-check all-check"
+												style="    height: 27px;"><input type="checkbox"
+													class="custom-control-input" id="customCheck-1"><label
 													class="custom-control-label" for="customCheck-1"> </label></div>
 										</th>
 										<th width="100px">Ürün&nbsp;Kodu</th>
@@ -260,9 +285,7 @@
 
 									</tr>
 								</thead>
-								<tbody>
-
-								</tbody>
+								<tbody> </tbody>
 							</table>
 
 						</div>
@@ -276,7 +299,8 @@
 									  height: 70px;">
 								<i class="la la-dollar f-w-600 font-size-45"></i>
 							</div>
-							<h6 class="text-muted  ">Toplam <span class=" pull-right">558.16 <i class="la la-dollar"></i></span></h6>
+							<h6 class="text-muted  ">Toplam <span class=" pull-right">558.16 <i
+										class="la la-dollar"></i></span></h6>
 							<h6 class="text-muted m-t-10 m-b-5">
 								İndirim <span class="pull-right">74.42<i class="la la-dollar"></i> </span>
 							</h6>
@@ -307,8 +331,8 @@
 				</div>
 				<div class="col-md-12">
 					<div class="card">
-						<h5 class="card-header"><button class="btn btn-info" data-toggle="modal" data-target="#modal-yorum"><i
-									class="la la-plus text-white"></i> Yeni Yorum</button>
+						<h5 class="card-header"><button class="btn btn-info" data-toggle="modal"
+								data-target="#modal-yorum"><i class="la la-plus text-white"></i> Yeni Yorum</button>
 							<small class="text-info pull-right p-t-10">Yorumlar Gerçek Zamanlı
 								Kaydedilmektedir..</small> </h5>
 						<div class="card-body">
@@ -356,11 +380,11 @@
 				<div class="modal-body">
 					<div class="form-group">
 
-						<textarea class="form-control" id="exampleFormControlTextarea" rows="3"></textarea>
+						<textarea class="form-control" id="exampleFormControlTextarea" rows="8"></textarea>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary btn-outline" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary btn-outline" data-dismiss="modal">İptal</button>
 					<button type="button" class="btn btn-primary" id="saveExp">Kaydet</button>
 				</div>
 			</div>
@@ -392,20 +416,6 @@
 								</tr>
 							</thead>
 							<tbody id="productsSelect">
-								<tr>
-									<td>#36367</td>
-									<td>Dell N5010 15.1" 1TB SSD Laptop</td>
-									<td>
-										<h6 class="text-info">5,000 <i class="la la-try text-info"></i></h6>
-									</td>
-									<td>
-										<h6 class="text-success">5,500 <i class="la la-try text-success"></i></h6>
-									</td>
-									<td>
-										<button class="btn btn-secondary btn-rounded btn-xs-sec">Seç <i class="la la-plus "></i>
-										</button>
-									</td>
-								</tr>
 
 							</tbody>
 						</table>
@@ -479,6 +489,20 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
+		var checkTable = function () {
+			if ($("#example tbody").html() == " ") {
+				$("#loading").show();
+				$("#table-card").hide();
+
+			}
+			else {
+				$("#loading").hide();
+				$("#table-card").show();
+				table.draw();
+
+			}
+		}
+
 		var countChecked = function ($table, checkboxClass) {
 			if ($table) {
 				// Find all elements with given class
@@ -531,8 +555,15 @@
 		});
 
 		table.on('row-reordered.dt', function (e, diff, edit) {
-			var data =$("#example tbody").html();
-		table.rows().data(data).draw();
+			var data = $("#example tbody").html();
+			table.rows().data(data).draw();
+		});
+		$("#cancel-rows").click(function () {
+			$(".delete-row-btns").hide();
+			$("#new-column").show();
+			$("#new-group").show();
+			$('.group-toolbar').show();
+
 		});
 		$("#delete-rows").click(function () {
 
@@ -602,6 +633,33 @@
 
 
 		});
+		$("#product-btn").click(function () {
+
+			firebase.database().ref('products').once('value').then(function (snap) {
+				var text = null;
+
+				$("#productsSelect").html(text);
+
+				for (var index in snap.val()) {
+					console.log(snap.val()[index]);
+					$("#productsSelect").prepend("	<tr>" +
+						"<td>" + snap.val()[index][0] + "</td>" +
+						"<td>" + snap.val()[index][1] + "</td>" +
+						"<td> <h6 class='text-info'>" + snap.val()[index][2] + " <i class='la la-try text-info'></i></h6></td>" +
+						"<td> <h6 class='text-success'>" + snap.val()[index][3] + "<i class='la la-try text-success'></i></h6></td>" +
+						"<td>" +
+						"	<button class='btn btn-secondary btn-rounded btn-xs-sec'>Seç <i class='la la-plus '></i>" +
+						"</button>" +
+						"</td>" +
+						"</tr>");
+
+				}
+
+
+
+			});
+
+		});
 		$("#saveComment").click(function () {
 			var d = new Date();
 
@@ -641,27 +699,6 @@
 
 			}
 			$(".yorum-alert").hide();
-
-
-		});
-		firebase.database().ref('products').once('value').then(function (snap) {
-
-			$("#productsSelect").html(" ");
-			for (var index in snap.val()) {
-				console.log(snap.val()[index]);
-				$("#productsSelect").prepend("	<tr>" +
-					"<td>" + snap.val()[index][0] + "</td>" +
-					"<td>" + snap.val()[index][1] + "</td>" +
-					"<td> <h6 class='text-info'>" + snap.val()[index][2] + " <i class='la la-try text-info'></i></h6></td>" +
-					"<td> <h6 class='text-success'>" + snap.val()[index][3] + "<i class='la la-try text-success'></i></h6></td>" +
-					"<td>" +
-					"	<button class='btn btn-secondary btn-rounded btn-xs-sec'>Seç <i class='la la-plus '></i>" +
-					"</button>" +
-					"</td>" +
-					"</tr>");
-
-			}
-
 
 
 		});
@@ -773,7 +810,7 @@
 			}
 
 			$('.tooltip').stop().fadeOut(200);
-
+			checkTable();
 		});
 		var s = "";
 		$('#example').on('focus', '.change', function () {
@@ -938,21 +975,21 @@
 				// e.preventDefault();
 
 				//var row =  $("#example tbody tr").index( $(this).closest("tr"));
-				var row =  $(this).closest("td");
-			
+				var row = $(this).closest("td");
+
 				var column = 4;
-				sessionStorage.setItem("row",row);
-				
-	
-	
+				sessionStorage.setItem("row", row);
+
+
+
 				$("#exampleFormControlTextarea").val($(this).attr("data-content"));
-			
-			$("#saveExp").click(function(){
-		
+
+				$("#saveExp").click(function () {
+
 					table.cell(row).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw(false);
 					$('#modalExp').modal('hide');
 				});
-         
+
 				//$("#exampleFormControlTextarea1").text( );
 				//	 alert(row.find("td:eq(3)").attr("data-content"))
 				//table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + person + "'>A</button>").draw()
