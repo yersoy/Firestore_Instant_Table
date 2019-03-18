@@ -202,15 +202,16 @@
 			</div>
 			<div class="p-t-0 p-l-0 p-r-0 row">
 				
-					<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b><span
-						id="adet"></span> Adet
-					Seçildi</b></h5>
-			<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
-				style="display: none">Seçilenleri
-				Sil</button>
-			<button class="btn btn-outline btn-danger delete-row-btns" id="cancel-rows"
-				style="display: none">İptal</button>
-				<div class="col-md-10 p-l-0" style="    overflow-x: auto;">
+					
+				<div class="col-md-10 " style="    overflow-x: auto;">
+						<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b><span
+							id="adet"></span> Adet
+						Seçildi</b></h5>
+				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
+					style="display: none">Seçilenleri
+					Sil</button>
+				<button class="btn btn-outline btn-danger delete-row-btns" id="cancel-rows"
+					style="display: none">İptal</button>
 						<div class="btn-group group-toolbar" role="group" aria-label="Basic example">
 								<button type="button" class="btn btn-secondary" id="product-btn" data-toggle="modal"
 									data-target="#modalproduct"><i class="la la-barcode"></i> Ürün</button>
@@ -234,7 +235,7 @@
 			
 
 
-				<div class="col-md-2 pull-right p-r-0 p-l-0">
+				<div class="col-md-2 ">
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<div class="input-group-text"><i class="la la-search"></i></div>
@@ -658,11 +659,7 @@
 						"</tr>");
 
 				}
-
-
-
 			});
-
 		});
 		$("#saveComment").click(function () {
 			var d = new Date();
@@ -703,43 +700,28 @@
 
 			}
 			$(".yorum-alert").hide();
-
-
 		});
 
 		$("#new-group").click(function () {
 			var data = table
 				.rows()
 				.data();
-
-
-
 			var newRow = "<tr> <td>" + data.length + "</td> <td><div class='custom-control custom-checkbox form-check'>" +
 				"<input type='checkbox' class='custom-control-input' id='customCheck" + data.length + "' >" +
 				"<label class='custom-control-label' for='customCheck" + data.length + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 				"</div></td> <td colspan='8'><hr class='style-eight' style='display:block'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td></tr>";
-
 			table.row.add($(newRow)).draw(false);
-
-
 			//firebase.database().ref('body').child(data.length).set(table.row(data.length).data());
 			$(".save").show();
 		})
-
 		$(".save").click(function () {
-
 			table.cells().every(function (rowIndex, colmnIndex, tableLoop, cellLoop) {
-
 				console.log(data);
 				var node = $(this.node());
-
 				if (node.find(".changed").length > 0) {
-
 					table.cell(rowIndex, colmnIndex).data(node.find(".changed").text());
-
 					if (colmnIndex == 5) {
 						table.cell(rowIndex, colmnIndex).data(parseFloat(node.text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-
 					}
 
 				}
@@ -752,10 +734,13 @@
 					//table.cell(rowIndex,colmnIndex).data();
 					var exp = $('<div/>').html(data).contents();
 					//	$(this).find("button").removeClass("btn");
-
 					//var exp=$(table.cell(rowIndex,colmnIndex).data());
-
+                  if(!exp.attr("data-content")){
+					table.cell(rowIndex, colmnIndex).data("<button class='btn btn-secondary btn-outline btn-exp'  data-original-title='Açıklama' data-content=' '>A</button>");
+				  }
+				  else{
 					table.cell(rowIndex, colmnIndex).data("<button class='btn btn-default btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + exp.attr("data-content") + "'>A</button>");
+				  }
 					console.log();
 				}
 				this.invalidate();
@@ -764,7 +749,6 @@
 			table.draw(false);
 			var tableData = table.rows().data();
 			var serverdata = [];
-
 			//firebase.database().ref("body").set()
 			//notifyMe("Ritma Table Verileri Başarı İle Kaydedildi..");
 			for (var i = 0; i <= tableData.length - 1; i++) {
@@ -776,7 +760,7 @@
 			$(".save").hide();
 		});
 		firebase.database().ref('body').on('value', snap => {
-			;
+			
 			table
 				.clear()
 				.draw(false);
@@ -809,10 +793,7 @@
 
 					});
 				}
-
-
 			}
-
 			$('.tooltip').stop().fadeOut(200);
 			checkTable();
 		});
@@ -832,6 +813,7 @@
 				$('.btn-exp').popover('hide');
 			//	$(e.target).popover('toggle');
 		});
+
 		$('#example').on('blur', '.change', function () {
 			if ($(this).has("input")) {
 				if (s == $(this).val()) {
@@ -850,7 +832,6 @@
 					table.cell(cell).data("<span class='text-info changed text-bold'>" + $(this).val() + "%</span>").draw(false);
 				}
 			}
-
 		});
 
 
@@ -860,8 +841,6 @@
 		});
 
 		$('#example').on('draw.dt', function () {
-
-
 			$("[data-toggle='tooltip']").popover({
 				html: true,
 				trigger: 'manual',
@@ -893,7 +872,6 @@
 			});
 			$(document).off('click', "#example tbody   td");
 			$("#example tbody   td").unbind('click');
-
 			$(document).off('click', "tbody .custom-checkbox input");
 			$("tbody .custom-checkbox input").off('click');
 			$("tbody .custom-checkbox input").unbind('click');
@@ -919,38 +897,24 @@
 			});
 
 			$("tbody .custom-checkbox input").click(function (evt) {
-
-
-
 				var result = countChecked($('#example'), '.custom-control-input');
 				var rowIndex = ($('#example tr').index($(this).closest('tr')) - 1);
 				var event = evt.target.checked;
 				console.log(rowIndex)
 				console.log(event)
 				console.log(result)
-
 				$("#adet").text(result.checked)
-
 				$(".delete-row-btns").show();
 				$("#new-column").hide();
 				$('.group-toolbar').hide();
 				$("#new-group").hide();
-
 				if (event == true) {
-
-
-
 					table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 						"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
 						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 						"</div>").draw(false);
 
 				} else {
-
-
-
-
-
 					table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 						"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
 						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
@@ -964,50 +928,34 @@
 					}
 
 				}
-
-
 			});
 			$(document).off('click', ".btn-exp");
 			$(".btn-exp").off('click');
 			$(".btn-exp").unbind('click');
 			$(document).on('click', ".btn-exp", function (e) {
 				$("[data-toggle='tooltip']").popover('hide');
-
-
 				$(".save").show();
 				$("#modalExp").modal();
 				// e.preventDefault();
-
 				//var row =  $("#example tbody tr").index( $(this).closest("tr"));
 				var row = $(this).closest("td");
-
 				var column = 4;
 				sessionStorage.setItem("row", row);
-
-
-
 				$("#exampleFormControlTextarea").val($(this).attr("data-content"));
-
 				$("#saveExp").click(function () {
 
 					table.cell(row).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw(false);
 					$('#modalExp').modal('hide');
 				});
-
 				//$("#exampleFormControlTextarea1").text( );
 				//	 alert(row.find("td:eq(3)").attr("data-content"))
 				//table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + person + "'>A</button>").draw()
-
 			});
-
-
 			$(".smSelect").select2().trigger('change');
 			$(".tt").html(table.column(9).data().sum());
-
 			$(".tt").html(parseFloat($(".tt").text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString() + '<i class="la la-try"></i>');
 			var data = table.rows().data();
 			console.log(data)
-
 			$('#example tbody  td:nth-child(1)').click(function () {
 
 			})
@@ -1025,10 +973,8 @@
 						$(this).find("input").trigger("focus")
 					}
 				}
-
 			})
 			$('#example tbody   td:nth-child(3)').click(function () {
-
 				if ($(this).has("input").length) {
 					console.log("input zaten var.")
 				}
@@ -1039,10 +985,6 @@
 					$(this).find("input").trigger("focus")
 
 				}
-
-
-
-
 			})
 			$('#example tbody   td:nth-child(5)').click(function () {
 				var text = $(this).text().replace(/,/g, '');
@@ -1057,7 +999,6 @@
 				}
 			})
 			$('#example tbody   td:nth-child(6)').click(function () {
-
 				if ($(this).has("select").length) {
 					console.log("input zaten var.")
 				}
@@ -1070,7 +1011,6 @@
 					$(".save").show();
 					$(this).find("select").trigger("focus")
 				}
-
 			})
 			$('#example tbody   td:nth-child(7)').click(function () {
 
@@ -1084,9 +1024,7 @@
 					$(this).find("input").trigger("focus")
 
 				}
-
 			})
-
 		});
 	});
 
