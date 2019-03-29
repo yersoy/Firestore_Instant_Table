@@ -201,38 +201,43 @@
 				</div>
 			</div>
 			<div class="p-t-0 p-l-0 p-r-0 row">
-				
-					
+
+
 				<div class="col-md-10 " style="    overflow-x: auto;">
-						<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b><span
-							id="adet"></span> Adet
-						Seçildi</b></h5>
-				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
-					style="display: none">Seçilenleri
-					Sil</button>
-				<button class="btn btn-outline btn-danger delete-row-btns" id="cancel-rows"
-					style="display: none">İptal</button>
-						<div class="btn-group group-toolbar" role="group" aria-label="Basic example">
-								<button type="button" class="btn btn-secondary" id="product-btn" data-toggle="modal"
-									data-target="#modalproduct"><i class="la la-barcode"></i> Ürün</button>
-								<button type="button" class="btn btn-secondary" id="new-column"> <i class="la la-indent"></i> Yeni
-									Satır</button>
-								<button type="button" class="btn btn-secondary"><i class="la la-bold"></i> Başlık Ekle</button>
-								<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara
-									Toplam</button>
-								<button type="button" class="btn btn-secondary"><i class="la la-comment"></i> Yorum Ekle</button>
-								<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i> Sayfa
-									Sonu
-								</button>
-								<button type="button" class="btn btn-secondary"><i class="la la-plus"></i> Boş Satır</button>
-			
-			
-						<button class="btn btn-info  save" style="display: none">Kaydet</button>
-			
-							</div>
-				</div>	
-				
-			
+					<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;">
+						<b><span id="adet"></span> Adet
+							Seçildi</b></h5>
+					<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
+						style="display: none">Seçilenleri
+						Sil</button>
+					<button class="btn btn-outline btn-danger delete-row-btns" id="cancel-rows"
+						style="display: none">İptal</button>
+					<div class="btn-group group-toolbar" role="group" aria-label="Basic example">
+						<button class="btn btn-info  save" style="display: none"><i
+								class="la la-save text-white"></i>Kaydet</button>
+						<button type="button" class="btn btn-secondary" id="product-btn" data-toggle="modal"
+							data-target="#modalproduct"><i class="la la-barcode"></i> Ürün</button>
+						<button type="button" class="btn btn-secondary" id="new-column"> <i class="la la-indent"></i>
+							Yeni
+							Satır</button>
+						<button type="button" class="btn btn-secondary"><i class="la la-bold"></i> Başlık Ekle</button>
+						<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara
+							Toplam</button>
+						<button type="button" class="btn btn-secondary"><i class="la la-comment"></i> Yorum
+							Ekle</button>
+						<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i>
+							Sayfa
+							Sonu
+						</button>
+						<button type="button" class="btn btn-secondary"><i class="la la-plus"></i> Boş Satır</button>
+
+
+
+
+					</div>
+				</div>
+
+
 
 
 				<div class="col-md-2 ">
@@ -543,7 +548,7 @@
 		table.on('row-reorder', function (e, diff, edit) {
 
 			$(".save").show();
-			var result = 'Reorder started on row: ' + edit.triggerRow.data()[1] + '<br>';
+			//var result = 'Reorder started on row: ' + edit.triggerRow.data()[1] + '<br>';
 
 			for (var i = 0, ien = diff.length; i < ien; i++) {
 				var rowData = table.row(diff[i].node).data();
@@ -556,12 +561,12 @@
 				// 	diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
 			}
 			table.draw(false);
-			console.log('Event result:<br>' + result);
+		//	console.log('Event result:<br>' + result);
 		});
 
 		table.on('row-reordered.dt', function (e, diff, edit) {
 			var data = $("#example tbody").html();
-			table.rows().data(data).draw();
+			table.rows().data(data).draw(false);
 		});
 		$("#cancel-rows").click(function () {
 			$(".delete-row-btns").hide();
@@ -735,12 +740,12 @@
 					var exp = $('<div/>').html(data).contents();
 					//	$(this).find("button").removeClass("btn");
 					//var exp=$(table.cell(rowIndex,colmnIndex).data());
-                  if(!exp.attr("data-content")){
-					table.cell(rowIndex, colmnIndex).data("<button class='btn btn-secondary btn-outline btn-exp'  data-original-title='Açıklama' data-content=' '>A</button>");
-				  }
-				  else{
-					table.cell(rowIndex, colmnIndex).data("<button class='btn btn-default btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + exp.attr("data-content") + "'>A</button>");
-				  }
+					if (!exp.attr("data-content") || exp.attr("data-content") == null || exp.attr("data-content") == " ") {
+						table.cell(rowIndex, colmnIndex).data("<button class='btn btn-secondary btn-outline btn-exp'  data-original-title='Açıklama' data-content=' '>A</button>").draw("false");
+					}
+					else {
+						table.cell(rowIndex, colmnIndex).data("<button class='btn btn-default btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + exp.attr("data-content") + "'>A</button>").draw("false");
+					}
 					console.log();
 				}
 				this.invalidate();
@@ -760,7 +765,7 @@
 			$(".save").hide();
 		});
 		firebase.database().ref('body').on('value', snap => {
-			
+
 			table
 				.clear()
 				.draw(false);
@@ -841,6 +846,33 @@
 		});
 
 		$('#example').on('draw.dt', function () {
+			$(document).off('click', ".btn-exp");
+			$(".btn-exp").off('click');
+			$(".btn-exp").unbind('click');
+			$(document).off('click', "#saveExp");
+			$("#saveExp").off('click');
+			$("#saveExp").unbind('click');
+			$(document).on('click', ".btn-exp", function (e) {
+
+				var row = undefined;
+				var column = undefined;
+				$("[data-toggle='tooltip']").popover('hide');
+				$(".save").show();
+				$("#modalExp").modal();
+
+				var row = $(this).closest("tr");
+				var column = 4;
+				//alert(row[0])
+
+				$("#exampleFormControlTextarea").val($(this).attr("data-content"));
+				$("#saveExp").click(function () {
+
+					table.cell(row[0], 4).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw(false);
+					$('#modalExp').modal('hide');
+			
+			
+				});
+			});
 			$("[data-toggle='tooltip']").popover({
 				html: true,
 				trigger: 'manual',
@@ -929,28 +961,8 @@
 
 				}
 			});
-			$(document).off('click', ".btn-exp");
-			$(".btn-exp").off('click');
-			$(".btn-exp").unbind('click');
-			$(document).on('click', ".btn-exp", function (e) {
-				$("[data-toggle='tooltip']").popover('hide');
-				$(".save").show();
-				$("#modalExp").modal();
-				// e.preventDefault();
-				//var row =  $("#example tbody tr").index( $(this).closest("tr"));
-				var row = $(this).closest("td");
-				var column = 4;
-				sessionStorage.setItem("row", row);
-				$("#exampleFormControlTextarea").val($(this).attr("data-content"));
-				$("#saveExp").click(function () {
 
-					table.cell(row).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw(false);
-					$('#modalExp').modal('hide');
-				});
-				//$("#exampleFormControlTextarea1").text( );
-				//	 alert(row.find("td:eq(3)").attr("data-content"))
-				//table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + person + "'>A</button>").draw()
-			});
+
 			$(".smSelect").select2().trigger('change');
 			$(".tt").html(table.column(9).data().sum());
 			$(".tt").html(parseFloat($(".tt").text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString() + '<i class="la la-try"></i>');
@@ -1025,6 +1037,8 @@
 
 				}
 			})
+				
+table.rows().invalidate();
 		});
 	});
 

@@ -281,6 +281,7 @@
             table = this.DataTable({
 
                 "columnDefs": [
+                    
                     {
                         "targets": [0],
                         "visible": false,
@@ -309,7 +310,9 @@
                     {
                         "targets": [4],
                         "orderable": false,
+                        "bSearchable": true ,
                         "width": "20px",
+                     
                     },
                     {
                         "targets": [5],
@@ -327,7 +330,6 @@
                         "searchable": false,
                         "width": "0px",
                         "className": "text-center",
-
                     },
                     {
                         "targets": [8],
