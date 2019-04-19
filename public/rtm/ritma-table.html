@@ -44,7 +44,6 @@
 		.btn-secondary:hover i {
 			color: white;
 		}
-
 		.btn-xs-sec {
 			height: 22px !important;
 			padding-top: 0 !important;
@@ -52,42 +51,35 @@
 			padding-right: 2px !important;
 			padding-left: 10px !important;
 		}
-
 		/* width */
 		::-webkit-scrollbar {
 			width: 4px;
 		}
-
 		/* Track */
 		::-webkit-scrollbar-track {
 			box-shadow: inset 0 0 1px grey;
 			border-radius: 1px;
 		}
-
 		/* Handle */
 		::-webkit-scrollbar-thumb {
 			background: #b0d7fa;
 			;
 			border-radius: 1px;
 		}
-
 		/* Handle on hover */
 		::-webkit-scrollbar-thumb:hover {
 			background: #b0d7fa;
 		}
-
 		.odd td {
 			height: 0px;
 			transition: all 5s linear;
 			padding: 5px;
 		}
-
 		.even td {
 			height: 0px;
 			transition: all 5s linear;
 			padding: 5px;
 		}
-
 		hr.style-eight {
 			overflow: visible;
 			/* For IE */
@@ -97,7 +89,6 @@
 			color: #333;
 			text-align: center;
 		}
-
 		hr.style-eight:after {
 			content: "Sayfa Sonu";
 			display: inline-block;
@@ -107,7 +98,6 @@
 			padding: 0 0.25em;
 			background: white;
 		}
-
 		.btn-exp {
 			padding-left: 7px;
 			padding-right: 8px;
@@ -115,33 +105,26 @@
 			padding-top: 0px;
 			height: 21px;
 		}
-
 		.table input {
 			font-size: 0.7rem !important;
 		}
-
 		#example tbody tr .la-times {
 			display: none;
 			margin-top: 3px;
 		}
-
 		#example tbody tr:hover .la-times {
 			display: inline-block;
 		}
-
 		.tooltip {
 			position: absolute !important;
 			pointer-events: none !important;
 		}
-
 		.popover {
 			pointer-events: none;
 		}
-
 		table.dataTable.table-sm>thead>tr>th {
 			padding-right: 5px;
 		}
-
 		table thead {
 			line-height: 3;
 		}
@@ -200,47 +183,37 @@
 					</div>
 				</div>
 			</div>
-			<div class="p-t-0 p-l-0 p-r-0 row">
-
-
-				<div class="col-md-10 " style="    overflow-x: auto;">
-					<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;">
-						<b><span id="adet"></span> Adet
-							Seçildi</b></h5>
-					<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
-						style="display: none">Seçilenleri
-						Sil</button>
-					<button class="btn btn-outline btn-danger delete-row-btns" id="cancel-rows"
-						style="display: none">İptal</button>
-					<div class="btn-group group-toolbar" role="group" aria-label="Basic example">
-						<button class="btn btn-info  save" style="display: none"><i
-								class="la la-save text-white"></i>Kaydet</button>
-						<button type="button" class="btn btn-secondary" id="product-btn" data-toggle="modal"
-							data-target="#modalproduct"><i class="la la-barcode"></i> Ürün</button>
-						<button type="button" class="btn btn-secondary" id="new-column"> <i class="la la-indent"></i>
-							Yeni
-							Satır</button>
-						<button type="button" class="btn btn-secondary"><i class="la la-bold"></i> Başlık Ekle</button>
-						<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara
-							Toplam</button>
-						<button type="button" class="btn btn-secondary"><i class="la la-comment"></i> Yorum
-							Ekle</button>
-						<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i>
-							Sayfa
-							Sonu
-						</button>
-						<button type="button" class="btn btn-secondary"><i class="la la-plus"></i> Boş Satır</button>
+			<div class="p-t-0 p-l-0 p-r-0">
+				<div class="btn-group group-toolbar" role="group" aria-label="Basic example">
+					<button type="button" class="btn btn-secondary" id="product-btn" data-toggle="modal"
+						data-target="#modalproduct"><i class="la la-barcode"></i> Ürün</button>
+					<button type="button" class="btn btn-secondary" id="new-column"> <i class="la la-indent"></i> Yeni
+						Satır</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-bold"></i> Başlık Ekle</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-plus-square"></i> Ara
+						Toplam</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-comment"></i> Yorum Ekle</button>
+					<button type="button" class="btn btn-secondary" id="new-group"><i class="la la-file-text"></i> Sayfa
+						Sonu
+					</button>
+					<button type="button" class="btn btn-secondary"><i class="la la-plus"></i> Boş Satır</button>
 
 
 
 
-					</div>
 				</div>
+				<h5 class="text-info p-t-10 delete-row-btns" style="width: 130px;float: left;display: none;"><b><span
+							id="adet"></span> Adet
+						Seçildi</b></h5>
+				<button class="btn btn-outline btn-info delete-row-btns" id="delete-rows"
+					style="display: none">Seçilenleri
+					Sil</button>
+				<button class="btn btn-outline btn-danger delete-row-btns" id="cancel-rows"
+					style="display: none">İptal</button>
+				<button class="btn btn-info  save" style="display: none">Kaydet</button>
 
 
-
-
-				<div class="col-md-2 ">
+				<div class="col-md-2 pull-right p-r-0">
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<div class="input-group-text"><i class="la la-search"></i></div>
@@ -448,17 +421,14 @@
 			alert('Desktop notifications not available in your browser. Try Chromium.');
 			return;
 		}
-
 		if (Notification.permission !== "granted")
 			Notification.requestPermission();
 	});
-
 	function notifyMe(message) {
 		// Let's check if the browser supports notifications
 		if (!("Notification" in window)) {
 			alert("This browser does not support desktop notification");
 		}
-
 		// Let's check if the user is okay to get some notification
 		else if (Notification.permission === "granted") {
 			// If it's okay let's create a notification
@@ -467,30 +437,24 @@
 				body: message,
 			});
 		}
-
 		// Otherwise, we need to ask the user for permission
 		// Note, Chrome does not implement the permission static property
 		// So we have to check for NOT 'denied' instead of 'default'
 		else if (Notification.permission !== 'denied') {
 			Notification.requestPermission(function (permission) {
-
 				// Whatever the user answers, we make sure we store the information
 				if (!('permission' in Notification)) {
 					Notification.permission = permission;
 				}
-
 				// If the user is okay, let's create a notification
 				if (permission === "granted") {
-
 					var notification = new Notification('Ritma Table', {
 						icon: 'https://i.hizliresim.com/bVEVyb.png',
-
 						body: message,
 					});
 				}
 			});
 		}
-
 		// At last, if the user already denied any notification, and you 
 		// want to be respectful there is no need to bother him any more.
 	}
@@ -503,16 +467,13 @@
 			if ($("#example tbody").html() == " ") {
 				$("#loading").show();
 				$("#table-card").hide();
-
 			}
 			else {
 				$("#loading").hide();
 				$("#table-card").show();
 				table.draw();
-
 			}
 		}
-
 		var countChecked = function ($table, checkboxClass) {
 			if ($table) {
 				// Find all elements with given class
@@ -528,28 +489,21 @@
 				}
 			}
 		}
-
-
 		var table = $("#example").RitmaTable({
 			"scrollX": true, "scrollY": "310px", "rowReorder": true, "search": "#rtmsearch", "addColumn": "#new-column"
 		});
 		function ordering() {
-
 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
-
 				table.cell(rowIdx, 0).data(rowIdx).draw(false);
 				table.cell(rowIdx, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 					"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIdx + "' >" +
 					"<label class='custom-control-label' for='customCheck" + rowIdx + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 					"</div>").draw(false);
 			});
-
 		}
 		table.on('row-reorder', function (e, diff, edit) {
-
 			$(".save").show();
-			//var result = 'Reorder started on row: ' + edit.triggerRow.data()[1] + '<br>';
-
+			var result = 'Reorder started on row: ' + edit.triggerRow.data()[1] + '<br>';
 			for (var i = 0, ien = diff.length; i < ien; i++) {
 				var rowData = table.row(diff[i].node).data();
 				table.cell(diff[i].node, 0).data(diff[i].newData);
@@ -561,22 +515,19 @@
 				// 	diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
 			}
 			table.draw(false);
-			//	console.log('Event result:<br>' + result);
+			console.log('Event result:<br>' + result);
 		});
-
 		table.on('row-reordered.dt', function (e, diff, edit) {
 			var data = $("#example tbody").html();
-			table.rows().data(data).draw(false);
+			table.rows().data(data).draw();
 		});
 		$("#cancel-rows").click(function () {
 			$(".delete-row-btns").hide();
 			$("#new-column").show();
 			$("#new-group").show();
 			$('.group-toolbar').show();
-
 		});
 		$("#delete-rows").click(function () {
-
 			$(".delete-row-btns").hide();
 			$("#new-column").show();
 			$("#new-group").show();
@@ -588,68 +539,46 @@
 				var linha = $(this).closest('tr');
 				if (input.prop("checked")) {
 					linha.fadeOut(400, function () {
-
 						table.row(this).remove();
-
 						//$(".save").trigger("click");
-
 					});
-
 				}
 			}).promise()
 				.done(function () {
 					ordering();
 				});
-
 			table.rows().data($('#example tbody').html()).draw(false);
-
 			var result = $("#example tr:eq(1)").find("input").each(function (index) { console.log(index) });
 			//table.row(index).remove();
-
 			console.log(result)
 			// 			table.rows().eq(0).each( function ( index ) {
-
 			// } );
-
 			// 			table.rows().every(function (rowIdx, tableLoop, rowLoop) {
 			// 				var row = table.row( rowIdx );
 			// 				var index=rowIdx;
-
 			//  var data = row.data();
 			//  console.log(row,data,index);
 			//  if (data) {
-
 			// 			 if(index){
 			// 				 var object = $($.parseHTML(data[1])).children("input")[0];
 			// 				 var input=  $(object);
 			// 				 console.log(input.attr("checked"))
-
 			// 				 if (input.attr("checked")=="checked") {
 			// 					 table.row(index).remove();
-
 			// 				 }
 			// 			 }
-
 			// 			 }
 			// 			 table.cell(index, 0).data(index);
 			// 			 table.cell(index, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 			// 				 "<input type='checkbox' class='custom-control-input' id='customCheck" + index + "' >" +
 			// 				 "<label class='custom-control-label' for='customCheck" + index + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 			// 				 "</div>");
-
-
 			// 			});
-
-
-
 		});
 		$("#product-btn").click(function () {
-
 			firebase.database().ref('products').once('value').then(function (snap) {
 				var text = null;
-
 				$("#productsSelect").html(text);
-
 				for (var index in snap.val()) {
 					console.log(snap.val()[index]);
 					$("#productsSelect").prepend("	<tr>" +
@@ -662,27 +591,23 @@
 						"</button>" +
 						"</td>" +
 						"</tr>");
-
 				}
 			});
 		});
 		$("#saveComment").click(function () {
 			var d = new Date();
-
 			var month = d.getMonth() + 1;
 			var day = d.getDate();
 			var time = d.getHours() + ":" + d.getMinutes();
 			var output = d.getFullYear() + '/' +
 				(('' + month).length < 2 ? '0' : '') + month + '/' +
 				(('' + day).length < 2 ? '0' : '') + day;
-
 			firebase.database().ref('yorum').push([$("#cc").val(), $("#cName").val(), $("#cMail").val(), output, time]);
 		});
 		if ($(".yorumlar").text() == null) {
 			$(".yorum-alert").show();
 		}
 		firebase.database().ref('yorum').on('value', snap => {
-
 			$(".yorumlar").html(" ");
 			for (var index in snap.val()) {
 				console.log(snap.val()[index]);
@@ -702,11 +627,9 @@
 					'</div>' +
 					'</div>' +
 					'	</div>');
-
 			}
 			$(".yorum-alert").hide();
 		});
-
 		$("#new-group").click(function () {
 			var data = table
 				.rows()
@@ -728,29 +651,20 @@
 					if (colmnIndex == 5) {
 						table.cell(rowIndex, colmnIndex).data(parseFloat(node.text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
 					}
-
 				}
-
 				if (node.find(".changed-exp").length > 0) {
 					var row = table.cell(rowIndex, colmnIndex);
-
 					var data = row.data();
 					//$(this.node()).children().removeClass("btn");
 					//table.cell(rowIndex,colmnIndex).data();
 					var exp = $('<div/>').html(data).contents();
 					//	$(this).find("button").removeClass("btn");
 					//var exp=$(table.cell(rowIndex,colmnIndex).data());
-					if (!exp.attr("data-content") || exp.attr("data-content") == null || exp.attr("data-content") == " ") {
-						table.cell(rowIndex, colmnIndex).data("<button class='btn btn-secondary btn-outline btn-exp'  data-original-title='Açıklama' data-content=' '>A</button>").draw("false");
-					}
-					else {
-						table.cell(rowIndex, colmnIndex).data("<button class='btn btn-default btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + exp.attr("data-content") + "'>A</button>").draw("false");
-					}
+					table.cell(rowIndex, colmnIndex).data("<button class='btn btn-default btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + exp.attr("data-content") + "'>A</button>");
 					console.log();
 				}
 				this.invalidate();
 			});
-
 			table.draw(false);
 			var tableData = table.rows().data();
 			var serverdata = [];
@@ -765,16 +679,14 @@
 			$(".save").hide();
 		});
 		firebase.database().ref('body').on('value', snap => {
-
+			;
 			table
 				.clear()
 				.draw(false);
 			console.log(snap.val());
-
 			for (var index in snap.val()) {
 				if (snap.val()[index][3] == "" && snap.val()[index][4] == "" && snap.val()[index][5] == "" && snap.val()[index][6] == "" && snap.val()[index][7] == "" && snap.val()[index][8] == "" && snap.val()[index][9] == "") {
 					var newRow = "<tr> <td>" + snap.val()[index][0] + "</td> <td>" + snap.val()[index][1] + "</td> <td colspan='8'>" + snap.val()[index][2] + "</td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td> <td style='display:none;'></td></tr>";
-
 					table.row.add($(newRow)).draw(false);
 				}
 				else {
@@ -795,7 +707,6 @@
 						$(this).find("hr").show(333, function () {
 							$(this).fadeIn("slow");
 						});
-
 					});
 				}
 			}
@@ -806,19 +717,16 @@
 		$('#example').on('focus', '.change', function () {
 			if ($(this).has("input")) {
 				s = $(this).val();
-
 			} else if ($(this).has("select")) {
 				s = $(this).val();
 				alert(s)
 			}
 		});
-
 		$(document).on('click', function (e) {
 			if ($('.btn-exp').length > 1)
 				$('.btn-exp').popover('hide');
 			//	$(e.target).popover('toggle');
 		});
-
 		$('#example').on('blur', '.change', function () {
 			if ($(this).has("input")) {
 				if (s == $(this).val()) {
@@ -838,65 +746,32 @@
 				}
 			}
 		});
-
-
-
 		$(".search-input").keyup(function () {
 			table.search($(this).val()).draw(false);
 		});
-
 		$('#example').on('draw.dt', function () {
-			$(document).off('click', ".btn-exp");
-			$(".btn-exp").off('click');
-			$(".btn-exp").unbind('click');
-			$(document).off('click', "#saveExp");
-			$("#saveExp").off('click');
-			$("#saveExp").unbind('click');
-			$(document).on('click', ".btn-exp", function (e) {
-
-				var row = undefined;
-				var column = undefined;
-				$("[data-toggle='tooltip']").popover('hide');
-				$(".save").show();
-				$("#modalExp").modal();
-
-				var row = $(this).closest("tr");
-				var column = 4;
-				//alert(row[0])
-
-				$("#exampleFormControlTextarea").val($(this).attr("data-content"));
-				$("#saveExp").click(function () {
-
-					table.cell(row[0], 4).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw(false);
-					$('#modalExp').modal('hide');
-
-
-				});
-			});
 			$("[data-toggle='tooltip']").popover({
-			    html: true,
-    trigger: 'hover',
-    container: '#example',
-    placement: 'top',
-    content: function () {
-        return '<div class="box"></div>';
-    }
-})
-.on('mouseenter', function () {
-    var _this = this;
-    $(this).popover('show');
-    $('.popover').on('mouseleave', function () {
-        $(_this).popover('hide');
-    });
-}).on('mouseleave', function () {
-    var _this = this;
-    setTimeout(function () {
-        if (!$('.popover:hover').length) {
-            $(_this).popover('hide');
-        }
-    }, 300);
-});
-			
+				html: true,
+				trigger: 'manual',
+				container: $(this).attr('id'),
+				placement: 'top',
+				content: function () {
+					$return = '<div class="hover-hovercard"></div>';
+				}
+			}).on("mouseenter", function () {
+				var _this = this;
+				$(this).popover("show");
+				$(this).siblings(".popover").on("mouseleave", function () {
+					$(_this).popover('hide');
+				});
+			}).on("mouseleave", function () {
+				var _this = this;
+				setTimeout(function () {
+					if (!$(".popover:hover").length) {
+						$(_this).popover("hide")
+					}
+				}, 100);
+			});
 			$(".all-check input").click(function () {
 				var row = $(this).closest("tr").index();
 				// table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
@@ -925,11 +800,8 @@
 					}
 				}
 			}
-
 			$(document).on('change', '.chk', function () {
-
 			});
-
 			$("tbody .custom-checkbox input").click(function (evt) {
 				var result = countChecked($('#example'), '.custom-control-input');
 				var rowIndex = ($('#example tr').index($(this).closest('tr')) - 1);
@@ -947,7 +819,6 @@
 						"<input type='checkbox' checked='checked' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
 						"<label class='custom-control-label' for='customCheck" + rowIndex + "'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>" +
 						"</div>").draw(false);
-
 				} else {
 					table.cell(rowIndex, 1).data("<div class='custom-control custom-checkbox form-check'>" +
 						"<input type='checkbox' class='custom-control-input' id='customCheck" + rowIndex + "' >" +
@@ -958,20 +829,36 @@
 						$("#new-column").show();
 						$('.group-toolbar').show();
 						$("#new-group").show();
-
 					}
-
 				}
 			});
-
-
+			$(document).off('click', ".btn-exp");
+			$(".btn-exp").off('click');
+			$(".btn-exp").unbind('click');
+			$(document).on('click', ".btn-exp", function (e) {
+				$("[data-toggle='tooltip']").popover('hide');
+				$(".save").show();
+				$("#modalExp").modal();
+				// e.preventDefault();
+				//var row =  $("#example tbody tr").index( $(this).closest("tr"));
+				var row = $(this).closest("td");
+				var column = 4;
+				sessionStorage.setItem("row", row);
+				$("#exampleFormControlTextarea").val($(this).attr("data-content"));
+				$("#saveExp").click(function () {
+					table.cell(row).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw(false);
+					$('#modalExp').modal('hide');
+				});
+				//$("#exampleFormControlTextarea1").text( );
+				//	 alert(row.find("td:eq(3)").attr("data-content"))
+				//table.cell(row, column).data("<button class='btn btn-default  btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + person + "'>A</button>").draw()
+			});
 			$(".smSelect").select2().trigger('change');
 			$(".tt").html(table.column(9).data().sum());
 			$(".tt").html(parseFloat($(".tt").text(), 10).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString() + '<i class="la la-try"></i>');
 			var data = table.rows().data();
 			console.log(data)
 			$('#example tbody  td:nth-child(1)').click(function () {
-
 			})
 			$('#example tbody  td:nth-child(2)').click(function () {
 				if ($(this).has("hr").length) {
@@ -997,12 +884,10 @@
 					$(this).html("<input type='text' class='form-control form-control-sm change b-info' value='" + text + "' />");
 					$(".save").show();
 					$(this).find("input").trigger("focus")
-
 				}
 			})
 			$('#example tbody   td:nth-child(5)').click(function () {
 				var text = $(this).text().replace(/,/g, '');
-
 				if ($(this).has("input").length) {
 					console.log("input zaten var.")
 				}
@@ -1027,7 +912,6 @@
 				}
 			})
 			$('#example tbody   td:nth-child(7)').click(function () {
-
 				if ($(this).has("input").length) {
 					console.log("input zaten var.")
 				}
@@ -1036,14 +920,10 @@
 					$(this).html("<input type='number' class='form-control form-control-sm change b-info' value='" + text + "' />");
 					$(".save").show();
 					$(this).find("input").trigger("focus")
-
 				}
 			})
-
-			table.rows().invalidate();
 		});
 	});
-
 </script>
 </body>
 
