@@ -561,7 +561,7 @@
 				// 	diff[i].newData + ' (was ' + diff[i].oldData + ')<br>';
 			}
 			table.draw(false);
-		//	console.log('Event result:<br>' + result);
+			//	console.log('Event result:<br>' + result);
 		});
 
 		table.on('row-reordered.dt', function (e, diff, edit) {
@@ -869,32 +869,34 @@
 
 					table.cell(row[0], 4).data("<button class='btn btn-info changed-exp btn-outline btn-exp' data-toggle='tooltip' data-original-title='Açıklama' data-content='" + $("textarea#exampleFormControlTextarea").val() + "'>A</button>").draw(false);
 					$('#modalExp').modal('hide');
-			
-			
+
+
 				});
 			});
 			$("[data-toggle='tooltip']").popover({
-				html: true,
-				trigger: 'manual',
-				container: $(this).attr('id'),
-				placement: 'top',
-				content: function () {
-					$return = '<div class="hover-hovercard"></div>';
-				}
-			}).on("mouseenter", function () {
-				var _this = this;
-				$(this).popover("show");
-				$(this).siblings(".popover").on("mouseleave", function () {
-					$(_this).popover('hide');
-				});
-			}).on("mouseleave", function () {
-				var _this = this;
-				setTimeout(function () {
-					if (!$(".popover:hover").length) {
-						$(_this).popover("hide")
-					}
-				}, 100);
-			});
+			    html: true,
+    trigger: 'hover',
+    container: '#example',
+    placement: 'top',
+    content: function () {
+        return '<div class="box"></div>';
+    }
+})
+.on('mouseenter', function () {
+    var _this = this;
+    $(this).popover('show');
+    $('.popover').on('mouseleave', function () {
+        $(_this).popover('hide');
+    });
+}).on('mouseleave', function () {
+    var _this = this;
+    setTimeout(function () {
+        if (!$('.popover:hover').length) {
+            $(_this).popover('hide');
+        }
+    }, 300);
+});
+			
 			$(".all-check input").click(function () {
 				var row = $(this).closest("tr").index();
 				// table.cell(row, 1).data("<div class='custom-control custom-checkbox form-check'>" +
@@ -1037,8 +1039,8 @@
 
 				}
 			})
-				
-table.rows().invalidate();
+
+			table.rows().invalidate();
 		});
 	});
 
