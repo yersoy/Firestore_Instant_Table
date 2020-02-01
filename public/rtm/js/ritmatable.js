@@ -469,13 +469,6 @@
 								"<input type='checkbox' class='custom-control-input' id='customCheck0' >"+
 								"<label class='custom-control-label' for='customCheck0'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
 							"</div>",
-                        "2": "#14124",
-                        "3": "ürün Hizmet",
-                        "4": "<button class='btn btn-secondary btn-outline btn-exp' >A</button>",
-                        "5": "4,235.0",
-                        "6": "18%",
-                        "7": "dolar",
-                        "8": "1",
                             "2": "<span class='changed text-info'>#0000</span>",
                             "3": "<span class='text-info changed'>Ürün & Hizmet Giriniz</span>",
                             "4": "<button class='btn btn-secondary btn-outline btn-exp changed-exp '>A</button>",
