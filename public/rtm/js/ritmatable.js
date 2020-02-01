@@ -476,7 +476,14 @@
                         "6": "18%",
                         "7": "dolar",
                         "8": "1",
-                        "9": "4,400.0 ",
+                            "2": "<span class='changed text-info'>#0000</span>",
+                            "3": "<span class='text-info changed'>Ürün & Hizmet Giriniz</span>",
+                            "4": "<button class='btn btn-secondary btn-outline btn-exp changed-exp '>A</button>",
+                            "5": "<span class='text-info changed'>0</span>",
+                            "6": "<span class='text-info changed'>18%</span>",
+                            "7": "dolar",
+                            "8": "<span class='text-info changed'>1</span>",
+                            "9": "<span class='text-info changed'>0</span>",
 
                     }).draw(false);
                 } else {
@@ -486,14 +493,14 @@
 								"<input type='checkbox' class='custom-control-input' id='customCheck"+data.length +"' >"+
 								"<label class='custom-control-label' for='customCheck"+data.length +"'><i class='la la-arrows-v ' style='margin-top: 6px;'></i></label>"+
 							"</div>",
-                        "2": "<span class='text-info'>#0000</span>",
-                        "3": "<span class='text-info'>Ürün & Hizmet Giriniz</span>",
-                        "4": "<button class='btn btn-secondary btn-outline btn-exp'>A</button>",
-                        "5": "<span class='text-info'>0</span>",
-                        "6": "<span class='text-info'>18%</span>",
+                        "2": "<span class='text-info changed'>#0000</span>",
+                        "3": "<span class='text-info changed'>Ürün & Hizmet Giriniz</span>",
+                        "4": "<button class='btn btn-secondary  btn-outline btn-exp changed-exp'>A</button>",
+                        "5": "<span class='text-info changed'>0</span>",
+                        "6": "<span class='text-info changed'>18%</span>",
                         "7": "dolar",
-                        "8": "<span class='text-info'>1</span>",
-                        "9": "<span class='text-info'>0</span>",
+                        "8": "<span class='text-info changed'>1</span>",
+                        "9": "<span class='text-info changed'>0</span>",
 
                     }).draw(false);
                 }
